@@ -857,5 +857,408 @@ function src(s, txt, y) {
   s.addNotes("Section 01의 마지막 장입니다. 핵심은 손실이 단계마다 누적된다는 점입니다. 저장 중 열화로 슬러지가 되면 그 연료는 엔진에 도달조차 못 합니다. 연소가 나쁘면 매연이 열회수면에 쌓여 이후 모든 사이클의 효율을 떨어뜨립니다. 그래서 한 지점만 개선하는 것으로는 부족하고, Tank-to-Wake 전체를 하나로 관리해야 합니다. Section 02부터 각 단계를 순서대로 다룹니다.");
 }
 
-pres.writeFile({ fileName: "/tmp/claude-0/-home-user-github-test/9f72a13f-ac8c-5519-89c5-583ea05e90c6/scratchpad/fuel_section01.pptx" })
+/* =======================================================================
+   S12 — 안정성 ① 시간과 온도
+   ======================================================================= */
+{
+  const s = pres.addSlide();
+  base(s, "12", "11   안정성 ①", "안정성을 해치는 것은 시간과 온도입니다");
+
+  const causes = [
+    ["① TIME — 시간", "시간", "1 ~ 5 개월",
+      ["벙커 시 On-spec → 항해 중 Off-spec", "TSP가 저장 기간에 비례해 상승", "Section 01 슬라이드 06의 7개 샘플"],
+      BLUE, "EEF2F9", false],
+    ["② TEMPERATURE — 온도", "온도", "열적 스트레스",
+      ["과열이 아스팔텐 응집을 가속", "분리 온도를 올려야 하는 고점도 연료", "VLSFO는 HSFO보다 열에 민감"],
+      ORANGE, "FDF2E9", false],
+    ["③ HOT SPIN TEST", "예측", "사전 진단",
+      ["슬러지 생성 가능성을 미리 측정", "원심관 바닥 축적량 약 0.2% 이상", "Alfa Laval · CIMAC 2023 Busan"],
+      ORANGE, null, true],
+  ];
+  const w3 = (CW - 0.42 * 2) / 3;
+  causes.forEach(([en, ko, big, bullets, col, tint, dark], i) => {
+    const x = M + i * (w3 + 0.42);
+    card(s, x, 1.74, w3, 3.30, dark ? NAVY : null);
+    label(s, en, x + 0.26, 1.96, w3 - 0.52, col);
+    s.addText(ko, {
+      x: x + 0.26, y: 2.2, w: w3 - 0.52, h: 0.42, margin: 0,
+      fontFace: SERIF, fontSize: 22, color: dark ? WHITE : NAVY, valign: "middle",
+    });
+    s.addText(big, {
+      x: x + 0.26, y: 2.66, w: w3 - 0.52, h: 0.34, margin: 0,
+      fontFace: SANS, fontSize: 15, bold: true, color: col, valign: "middle",
+    });
+    bullets.forEach((b, j) => {
+      const by = 3.12 + j * 0.42;
+      s.addShape(pres.ShapeType.roundRect, {
+        x: x + 0.28, y: by + 0.11, w: 0.12, h: 0.12, rectRadius: 0.06,
+        fill: { color: col }, line: { width: 0 },
+      });
+      s.addText(b, {
+        x: x + 0.52, y: by, w: w3 - 0.78, h: 0.36, margin: 0, lineSpacing: 13,
+        fontFace: SANS, fontSize: 10, color: dark ? "D6E0EE" : BODY, valign: "middle",
+      });
+    });
+    if (i < 2) {
+      s.addText("▶", {
+        x: x + w3 + 0.03, y: 3.2, w: 0.36, h: 0.4, margin: 0,
+        fontFace: SANS, fontSize: 14, color: "B9C4D6", align: "center", valign: "middle",
+      });
+    }
+  });
+
+  banner(s, "TSP는 그날의 상태를 재고, Hot Spin Test는 앞으로 생길 슬러지를 잽니다.", 5.24);
+  src(s, "출처: Viswa Group 2025 Table 3 · Fig 13 · CIMAC Congress 2023 Busan, Paper No. 014 (Alfa Laval)", 6.24);
+  s.addNotes("Section 01 슬라이드 06에서 본 현상의 원인을 두 가지로 좁힙니다 — 시간과 온도입니다. 그리고 중요한 전환점이 여기입니다. TSP·TSA는 시료를 뽑은 그날의 침전물을 재는 시험이라 앞일을 말해주지 않습니다. Hot Spin Test는 원심분리 조건을 재현해 앞으로 얼마나 슬러지가 생길지를 미리 봅니다. 즉 사후 확인에서 사전 예측으로 넘어가는 도구입니다.");
+}
+
+/* =======================================================================
+   S13 — 안정성 ② FPC 실측
+   ======================================================================= */
+{
+  const s = pres.addSlide();
+  base(s, "13", "12   안정성 ②", "FuelPower Conditioner — 8개 항구 실측");
+
+  card(s, M, 1.74, 7.62, 3.42);
+  label(s, "HOT SPIN TEST — BEFORE vs AFTER ADDITIVE", M + 0.26, 1.96, 5.6, BLUE);
+
+  const hdr = ["항구", "점도", "MCR", "분리온도", "Before", "After", "개선율"];
+  const colW = [1.32, 0.86, 0.8, 1.02, 0.92, 0.92, 1.24];
+  const fpc = [
+    ["Zeebrugge", "335.2", "11.6", "98 °C", "0.19", "0.13", "31.58%"],
+    ["Tuapse", "18.9", "2.96", "40 °C", "0.24", "0.20", "16.67%"],
+    ["Amsterdam", "206.6", "10.91", "98 °C", "0.15", "0.08", "46.67%"],
+    ["Flushing", "239.7", "9.08", "98 °C", "0.13", "0.09", "30.77%"],
+    ["Duqm", "230.7", "7.15", "98 °C", "0.33", "0.20", "39.39%"],
+    ["Amsterdam", "314.4", "10.02", "98 °C", "0.16", "0.10", "37.50%"],
+    ["Vlissingen", "242.8", "10.5", "98 °C", "0.13", "0.07", "46.15%"],
+    ["Callao", "335.1", "8.84", "98 °C", "0.17", "0.11", "35.29%"],
+  ];
+  const rows = [
+    hdr.map(h => ({ text: h, options: { fontFace: SANS, fontSize: 9.5, bold: true, color: WHITE, align: "center" } })),
+    ...fpc.map(r => r.map((c, ci) => ({
+      text: c,
+      options: {
+        fontFace: SANS, fontSize: 9.5,
+        bold: ci === 0 || ci === 6,
+        color: ci === 6 ? GREEN : (ci === 4 ? RED : NAVY),
+        align: ci === 0 ? "left" : "center",
+      },
+    }))),
+  ];
+  s.addTable(rows, {
+    x: M + 0.26, y: 2.26, w: 7.08, colW,
+    rowH: [0.3, ...Array(8).fill(0.28)],
+    border: { type: "solid", color: LINE, pt: 0.6 },
+    fill: { color: WHITE }, valign: "middle", margin: 2,
+  });
+  s.addShape(pres.ShapeType.rect, {
+    x: M + 0.26, y: 2.26, w: 7.08, h: 0.3, fill: { color: NAVY }, line: { width: 0 },
+  });
+  let hx = M + 0.26;
+  hdr.forEach((h, i) => {
+    s.addText(h, {
+      x: hx, y: 2.26, w: colW[i], h: 0.3, margin: 0,
+      fontFace: SANS, fontSize: 9.5, bold: true, color: WHITE, align: "center", valign: "middle",
+    });
+    hx += colW[i];
+  });
+  s.addText("RMG380 · 점도 cSt @50°C · MCR % · Hot Spin 침전 % · Tuapse는 분리온도 40°C, 저점도 조건", {
+    x: M + 0.26, y: 4.84, w: 7.08, h: 0.24, margin: 0,
+    fontFace: SANS, fontSize: 8.5, italic: true, color: MUTED, valign: "middle",
+  });
+
+  const stats = [["평균 개선율", "35.5", BLUE], ["최고 개선율", "46.67", GREEN]];
+  stats.forEach(([t, v, col], i) => {
+    const y = 1.74 + i * 1.14;
+    card(s, M + 7.94, y, 4.15, 1.0);
+    s.addText(t, {
+      x: M + 8.2, y: y + 0.12, w: 3.63, h: 0.26, margin: 0,
+      fontFace: SANS, fontSize: 10.5, bold: true, color: MUTED, valign: "middle",
+    });
+    s.addText(
+      [
+        { text: v, options: { fontFace: SANS, fontSize: 34, bold: true, color: col } },
+        { text: " %", options: { fontFace: SANS, fontSize: 16, bold: true, color: col } },
+      ],
+      { x: M + 8.2, y: y + 0.4, w: 3.63, h: 0.48, margin: 0, valign: "middle" }
+    );
+  });
+
+  card(s, M + 7.94, 4.02, 4.15, 1.14, NAVY);
+  s.addText("LLOYD'S REGISTER FOBAS", {
+    x: M + 8.2, y: 4.2, w: 3.63, h: 0.28, margin: 0,
+    fontFace: SANS, fontSize: 10, bold: true, charSpacing: 1.4, color: ORANGE, valign: "middle",
+  });
+  s.addText("Additive Performance\nCertification Scheme 검증", {
+    x: M + 8.2, y: 4.5, w: 3.63, h: 0.52, margin: 0, lineSpacing: 15,
+    fontFace: SANS, fontSize: 11, bold: true, color: WHITE, valign: "middle",
+  });
+
+  banner(s, "8개 항구 RMG380 실측에서 Hot Spin 침전이 평균 35.5% 줄었습니다. 제3자 검증을 거친 수치입니다.", 5.36);
+  src(s, "출처: Wilhelmsen Ships Service 사내 실측 데이터 (Hot Spin, 분리온도 40 · 98°C) · Lloyd's Register FOBAS 인증", 6.36);
+  s.addNotes("여덟 개 항구에서 실제로 받은 RMG380으로 시험한 결과입니다. 여기서 정직하게 짚을 부분이 하나 있습니다 — Tuapse만 개선율이 16.67%로 낮은데, 이 시료는 분리온도가 40°C이고 점도 18.9, MCR 2.96으로 나머지와 성격이 다릅니다. 즉 이 첨가제는 아스팔텐이 많은 무거운 연료에서 효과가 크다는 뜻이고, 그것이 원래 겨냥하는 대상입니다.");
+}
+
+/* =======================================================================
+   S14 — 안정성 ③ 작용 메커니즘
+   ======================================================================= */
+{
+  const s = pres.addSlide();
+  base(s, "14", "13   안정성 ③", "아스팔텐을 흩어놓습니다");
+
+  // --- untreated: agglomerated ---
+  card(s, M, 1.74, 5.5, 2.72);
+  label(s, "UNTREATED — 응집", M + 0.28, 1.96, 3.0, RED);
+  s.addShape(pres.ShapeType.roundRect, {
+    x: M + 0.28, y: 2.26, w: 4.94, h: 1.7, rectRadius: 0.08,
+    fill: { color: "FBF2EE" }, line: { color: "EBD9D2", width: 0.75 },
+  });
+  const clumps = [[0.7, 0.5, 0.3], [1.9, 1.05, 0.34], [3.15, 0.42, 0.26], [3.9, 1.1, 0.3], [2.6, 1.35, 0.22], [1.15, 1.42, 0.2], [4.35, 0.55, 0.24]];
+  clumps.forEach(([dx, dy, d]) => {
+    s.addShape(pres.ShapeType.roundRect, {
+      x: M + 0.28 + dx, y: 2.26 + dy, w: d, h: d, rectRadius: d / 2,
+      fill: { color: "6B4A3A" }, line: { width: 0 },
+    });
+  });
+  s.addText("입자가 뭉쳐 침전 → 정유기 · 필터 막힘", {
+    x: M + 0.28, y: 4.02, w: 4.94, h: 0.26, margin: 0,
+    fontFace: SANS, fontSize: 10.5, bold: true, color: RED, valign: "middle",
+  });
+
+  // --- treated: dispersed ---
+  card(s, M + 5.82, 1.74, 5.5, 2.72);
+  label(s, "TREATED — 미세 분산", M + 6.1, 1.96, 3.2, GREEN);
+  s.addShape(pres.ShapeType.roundRect, {
+    x: M + 6.1, y: 2.26, w: 4.94, h: 1.7, rectRadius: 0.08,
+    fill: { color: "F0F6F3" }, line: { color: "D6E7DF", width: 0.75 },
+  });
+  for (let r = 0; r < 5; r++) {
+    for (let c = 0; c < 14; c++) {
+      const d = 0.075;
+      s.addShape(pres.ShapeType.roundRect, {
+        x: M + 6.28 + c * 0.335 + (r % 2 ? 0.16 : 0),
+        y: 2.42 + r * 0.29, w: d, h: d, rectRadius: d / 2,
+        fill: { color: "8A6B58" }, line: { width: 0 },
+      });
+    }
+  }
+  s.addText("입자가 고르게 흩어져 연료가 균질하게 유지됨", {
+    x: M + 6.1, y: 4.02, w: 4.94, h: 0.26, margin: 0,
+    fontFace: SANS, fontSize: 10.5, bold: true, color: GREEN, valign: "middle",
+  });
+
+  const eff = [
+    ["아스팔텐 분산", "응집 · 침전 방지"],
+    ["안정성 · 호환성 확보", "블렌드 간 불호환 완화"],
+    ["정유기 · 필터 효율", "막힘 방지 — Section 01 슬라이드 07"],
+    ["투입 비율", "1 : 10,000  (연료 10톤당 1 L)"],
+  ];
+  const ew = (CW - 0.32 * 3) / 4;
+  eff.forEach(([t, d], i) => {
+    const x = M + i * (ew + 0.32);
+    card(s, x, 4.66, ew, 0.86, i === 3 ? NAVY : null);
+    s.addText(t, {
+      x: x + 0.22, y: 4.78, w: ew - 0.44, h: 0.28, margin: 0,
+      fontFace: SANS, fontSize: 11.5, bold: true, color: i === 3 ? ORANGE : NAVY, valign: "middle",
+    });
+    s.addText(d, {
+      x: x + 0.22, y: 5.06, w: ew - 0.44, h: 0.32, margin: 0, lineSpacing: 13,
+      fontFace: SANS, fontSize: 9.5, color: i === 3 ? "D6E0EE" : BODY, valign: "middle",
+    });
+  });
+
+  banner(s, "분리기가 걸러내지 못하는 것은 애초에 뭉치지 않게 만드는 것이 답입니다.", 5.72);
+  src(s, "출처: Unitor™ FuelPower™ Conditioner 제품 자료 · Lloyd's Register FOBAS 검증", 6.72);
+  s.addNotes("메커니즘은 단순합니다. 아스팔텐이 뭉쳐서 큰 덩어리가 되면 침전하고 정유기와 필터를 막습니다. FPC는 입자를 미세하게 흩어놓아 애초에 뭉치지 않게 합니다. Section 01 슬라이드 09에서 분리기가 못 하는 일로 꼽은 '시간 경과 열화'와 '블렌드 간 불호환'이 바로 여기서 처리됩니다. 분리기를 대체하는 것이 아니라 분리기가 일할 수 있는 상태로 연료를 유지시켜 주는 것입니다.");
+}
+
+/* =======================================================================
+   S15 — 윤활성 ① 문제
+   ======================================================================= */
+{
+  const s = pres.addSlide();
+  base(s, "15", "14   윤활성 ①", "황을 뺐더니 윤활성이 함께 빠졌습니다");
+
+  card(s, M, 1.74, 6.0, 3.42);
+  label(s, "WHY IT HAPPENS", M + 0.28, 1.96, 4.4, BLUE);
+  s.addText("규제가 만든 연쇄", {
+    x: M + 0.28, y: 2.2, w: 5.44, h: 0.32, margin: 0,
+    fontFace: SANS, fontSize: 14, bold: true, color: NAVY, valign: "middle",
+  });
+  const chainL = [
+    ["ECA · SECA 확대", "저유황 디젤 사용 의무"],
+    ["탈황 정제 강화", "황을 걷어내는 공정"],
+    ["극성 성분 동반 제거", "천연 윤활 성분이 같이 빠짐"],
+    ["윤활성 저하", "금속끼리 직접 닿기 시작"],
+  ];
+  chainL.forEach(([t, d], i) => {
+    const y = 2.62 + i * 0.6;
+    s.addShape(pres.ShapeType.roundRect, {
+      x: M + 0.28, y: y + 0.06, w: 0.3, h: 0.3, rectRadius: 0.15,
+      fill: { color: i === 3 ? RED : BLUE }, line: { width: 0 },
+    });
+    s.addText(String(i + 1), {
+      x: M + 0.28, y: y + 0.06, w: 0.3, h: 0.3, margin: 0,
+      fontFace: SANS, fontSize: 10, bold: true, color: WHITE, align: "center", valign: "middle",
+    });
+    s.addText(t, {
+      x: M + 0.7, y: y + 0.02, w: 2.3, h: 0.38, margin: 0,
+      fontFace: SANS, fontSize: 12, bold: true, color: i === 3 ? RED : NAVY, valign: "middle",
+    });
+    s.addText(d, {
+      x: M + 3.04, y: y + 0.02, w: 2.68, h: 0.38, margin: 0,
+      fontFace: SANS, fontSize: 10.5, color: BODY, valign: "middle",
+    });
+    if (i < 3) {
+      s.addText("▼", {
+        x: M + 0.28, y: y + 0.38, w: 0.3, h: 0.2, margin: 0,
+        fontFace: SANS, fontSize: 7, color: "B9C4D6", align: "center", valign: "middle",
+      });
+    }
+  });
+
+  card(s, M + 6.32, 1.74, 5.77, 3.42);
+  label(s, "MEASURED RESULT — ULSD ALONE", M + 6.6, 1.96, 4.6, RED);
+  s.addText(
+    [
+      { text: "535", options: { fontFace: SANS, fontSize: 52, bold: true, color: RED } },
+      { text: " ± 50 µm", options: { fontFace: SANS, fontSize: 15, color: MUTED } },
+    ],
+    { x: M + 6.6, y: 2.24, w: 5.21, h: 0.86, margin: 0, valign: "middle" }
+  );
+  s.addText("HFRR 마모흔 직경 (ISO 12156-1, WS1.4)", {
+    x: M + 6.6, y: 3.08, w: 5.21, h: 0.28, margin: 0,
+    fontFace: SANS, fontSize: 11, bold: true, color: BODY, valign: "middle",
+  });
+
+  const lim = [["ISO 8217", "520 µm", "초과 — 부적합"], ["EN 590", "460 µm", "초과 — 부적합"]];
+  lim.forEach(([nm, v, judge], i) => {
+    const y = 3.46 + i * 0.42;
+    s.addShape(pres.ShapeType.roundRect, {
+      x: M + 6.6, y, w: 5.21, h: 0.36, rectRadius: 0.06,
+      fill: { color: "FDECEA" }, line: { width: 0 },
+    });
+    s.addText(nm, {
+      x: M + 6.74, y, w: 1.4, h: 0.36, margin: 0,
+      fontFace: SANS, fontSize: 10.5, bold: true, color: NAVY, valign: "middle",
+    });
+    s.addText("한계 " + v, {
+      x: M + 8.2, y, w: 1.6, h: 0.36, margin: 0,
+      fontFace: SANS, fontSize: 10.5, color: BODY, valign: "middle",
+    });
+    s.addText(judge, {
+      x: M + 9.9, y, w: 1.8, h: 0.36, margin: 0,
+      fontFace: SANS, fontSize: 10.5, bold: true, color: RED, align: "right", valign: "middle",
+    });
+  });
+
+  s.addText("손상 부위: 연료펌프 플런저 · 인젝터 — Section 01 슬라이드 03의 New Orleans 사례와 같은 부위입니다.", {
+    x: M + 6.6, y: 4.36, w: 5.21, h: 0.56, margin: 0, lineSpacing: 15,
+    fontFace: SANS, fontSize: 10, italic: true, color: MUTED, valign: "middle",
+  });
+
+  banner(s, "윤활성은 분리기로 개선할 수 없습니다. 입자가 아니라 연료의 화학적 성질이기 때문입니다.", 5.36);
+  src(s, "출처: Unitor™ DieselPower™ Lubricity 제품 매뉴얼 (ISO 12156-1 HFRR 시험) · ISO 8217 / EN 590 규격 한계", 6.36);
+  s.addNotes("Section 01에서 그은 경계선의 가장 깨끗한 사례입니다. 윤활성은 고형분이나 물처럼 분리해낼 수 있는 대상이 아니라 연료 자체의 화학적 성질입니다. 원심분리기를 아무리 잘 돌려도 535 µm는 535 µm 그대로입니다. 그리고 이 시험의 ULSD는 다른 ISO 항목은 모두 만족한 정상 연료입니다 — 슬라이드 03에서 본 착시와 정확히 같은 구조입니다.");
+}
+
+/* =======================================================================
+   S13 — 윤활성 ② 결과
+   ======================================================================= */
+{
+  const s = pres.addSlide();
+  base(s, "16", "15   윤활성 ②", "DieselPower Lubricity — 실측 결과");
+
+  card(s, M, 1.74, 6.9, 3.42);
+
+  // --- manual bar chart with spec threshold lines ---
+  const BASE_Y = 4.86;            // 0 µm
+  const PPU = 0.0044;             // inch per µm
+  const bars = [
+    ["ULSD 단독", 535, RED, "부적합"],
+    ["+ 100 ppm", 396, BLUE, "합격"],
+    ["+ 150 ppm", 355, GREEN, "합격"],
+  ];
+  const bx0 = M + 1.28, bw = 1.16, bgap = 0.62;
+
+  [[520, "ISO 8217  520 µm", "E6A23C"], [460, "EN 590  460 µm", "B9C4D6"]].forEach(([v, t, c]) => {
+    const y = BASE_Y - v * PPU;
+    s.addShape(pres.ShapeType.line, {
+      x: M + 0.34, y, w: 6.22, h: 0,
+      line: { color: c, width: 1, dashType: "dash" },
+    });
+    s.addText(t, {
+      x: M + 4.92, y: y - 0.2, w: 1.64, h: 0.2, margin: 0,
+      fontFace: SANS, fontSize: 8.5, bold: true, color: c, align: "right", valign: "middle",
+    });
+  });
+
+  bars.forEach(([nm, v, col, judge], i) => {
+    const x = bx0 + i * (bw + bgap);
+    const h = v * PPU;
+    s.addShape(pres.ShapeType.roundRect, {
+      x, y: BASE_Y - h, w: bw, h, rectRadius: 0.05,
+      fill: { color: col }, line: { width: 0 },
+    });
+    s.addText(String(v), {
+      x, y: BASE_Y - h - 0.34, w: bw, h: 0.32, margin: 0,
+      fontFace: SANS, fontSize: 15, bold: true, color: col, align: "center", valign: "middle",
+    });
+    s.addText(nm, {
+      x: x - 0.18, y: BASE_Y + 0.04, w: bw + 0.36, h: 0.26, margin: 0,
+      fontFace: SANS, fontSize: 10.5, bold: true, color: NAVY, align: "center", valign: "middle",
+    });
+    s.addText(judge, {
+      x: x - 0.18, y: BASE_Y + 0.28, w: bw + 0.36, h: 0.24, margin: 0,
+      fontFace: SANS, fontSize: 9.5, bold: true, color: col, align: "center", valign: "middle",
+    });
+  });
+  s.addShape(pres.ShapeType.line, {
+    x: M + 0.34, y: BASE_Y, w: 6.22, h: 0, line: { color: LINE, width: 1 },
+  });
+  label(s, "HFRR WEAR SCAR  (ISO 12156-1, WS1.4 µm)", M + 0.34, 1.96, 5.0, BLUE);
+
+  card(s, M + 7.22, 1.74, 4.87, 3.42);
+  label(s, "HOW TO APPLY", M + 7.5, 1.96, 4.3, ORANGE);
+
+  const spec = [
+    ["투입 비율", "0.1 – 0.2 L/ton"],
+    ["시험 근거 투입량", "0.125 L/ton → 460 µm 미만"],
+    ["투입 지점", "Storage → Settling / Service\nTransfer Pump 이용"],
+    ["보관 온도", "20 – 40 °C"],
+    ["병용 가능", "유동점 · 세탄가 · 소포제"],
+  ];
+  spec.forEach(([k, v], i) => {
+    const y = 2.26 + i * 0.5;
+    if (i > 0) {
+      s.addShape(pres.ShapeType.line, {
+        x: M + 7.5, y: y - 0.05, w: 4.31, h: 0, line: { color: LINE, width: 0.75 },
+      });
+    }
+    s.addText(k, {
+      x: M + 7.5, y, w: 1.62, h: 0.44, margin: 0,
+      fontFace: SANS, fontSize: 10.5, bold: true, color: NAVY, valign: "middle",
+    });
+    s.addText(v, {
+      x: M + 9.16, y, w: 2.65, h: 0.44, margin: 0, lineSpacing: 13,
+      fontFace: SANS, fontSize: 10, color: BODY, valign: "middle",
+    });
+  });
+
+  s.addShape(pres.ShapeType.roundRect, {
+    x: M + 7.5, y: 4.76, w: 4.31, h: 0.32, rectRadius: 0.06,
+    fill: { color: "FDECEA" }, line: { width: 0 },
+  });
+  s.addText("주의  천연고무 · NBR · PVC · 폴리우레탄 부적합", {
+    x: M + 7.5, y: 4.76, w: 4.31, h: 0.32, margin: 0,
+    fontFace: SANS, fontSize: 9.5, bold: true, color: RED, align: "center", valign: "middle",
+  });
+
+  banner(s, "150 ppm 투입으로 535 → 355 µm. 마모흔 34% 감소, 두 규격을 모두 여유 있게 통과합니다.", 5.36);
+  src(s, "출처: Unitor™ DieselPower™ Lubricity 제품 매뉴얼 (Product No. 650-779094) — 사내 Lab Test 결과", 6.36);
+  s.addNotes("막대 세 개가 전부입니다. 무처리 ULSD는 535 µm로 ISO 8217 520을 넘겨 부적합입니다. 100 ppm에서 396, 150 ppm에서 355로 떨어지고 두 규격 모두 통과합니다. 150 ppm 기준 33.6% 개선인데, 이 수치는 Lloyd's Register Product Verification Scheme 인증으로 공표된 34%와 일치합니다. 재질 주의는 실무에서 중요합니다 — 투입 계통의 씰과 개스킷 재질을 먼저 확인해야 합니다.");
+}
+
+pres.writeFile({ fileName: "/tmp/claude-0/-home-user-github-test/9f72a13f-ac8c-5519-89c5-583ea05e90c6/scratchpad/fuel_training_deck.pptx" })
   .then(f => console.log("WROTE " + f));
