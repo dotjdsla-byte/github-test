@@ -1291,5 +1291,131 @@ function src(s, txt, y) {
   );
 }
 
+/* =======================================================================
+   S17 — 윤활성 ③ 본선 적용 판단
+   ======================================================================= */
+{
+  const s = pres.addSlide();
+  base(s, "17", "16   윤활성 ③", "우리 배도 해당되는지, 직접 확인하는 법");
+
+  s.addShape(pres.ShapeType.roundRect, {
+    x: M, y: 1.7, w: CW, h: 0.46, rectRadius: 0.07,
+    fill: { color: "FDF2E9" }, line: { width: 0 },
+  });
+  s.addText(
+    [
+      { text: "먼저 이것부터 —  ", options: { fontFace: SANS, fontSize: 11, bold: true, color: ORANGE } },
+      { text: "지난 2년간 연료펌프 플런저·인젝터 스페어 교체 주기가 짧아졌습니까?  그렇다면 윤활성은 의심할 이유가 있는 후보입니다.",
+        options: { fontFace: SANS, fontSize: 11, color: BODY } },
+    ],
+    { x: M + 0.3, y: 1.7, w: CW - 0.6, h: 0.46, margin: 0, valign: "middle" }
+  );
+
+  const steps = [
+    ["STEP 01", "성적서를 여십시오", BLUE, [
+      "최근 MGO 분석 성적서에",
+      "Lubricity (HFRR) 항목이",
+      "있습니까?",
+      "",
+      "없다면 시험 자체를 안 한 것입니다.",
+      "ISO 8217은 황 0.050% 이하",
+      "증류유에 이 시험을 요구합니다.",
+    ]],
+    ["STEP 02", "OEM 한계를 확인하십시오", BLUE, [
+      "본선 엔진 매뉴얼의",
+      "윤활성 허용치는 얼마입니까?",
+      "",
+      "ISO 8217 (선박 증류유)  520 µm",
+      "EN 590 (자동차 경유)  460 µm",
+      "",
+      "OEM이 더 엄격할 수 있습니다.",
+    ]],
+    ["STEP 03", "두 숫자를 비교하십시오", ORANGE, null],
+    ["STEP 04", "비용을 비교하십시오", GREEN, null],
+  ];
+  const w4 = (CW - 0.34 * 3) / 4;
+  steps.forEach(([tag, title, col, lines], i) => {
+    const x = M + i * (w4 + 0.34);
+    card(s, x, 2.34, w4, 2.92);
+    label(s, tag, x + 0.24, 2.54, w4 - 0.48, col);
+    s.addText(title, {
+      x: x + 0.24, y: 2.78, w: w4 - 0.48, h: 0.34, margin: 0,
+      fontFace: SANS, fontSize: 13, bold: true, color: NAVY, valign: "middle",
+    });
+
+    if (lines) {
+      s.addText(lines.join("\n"), {
+        x: x + 0.24, y: 3.2, w: w4 - 0.48, h: 1.9, margin: 0, lineSpacing: 15,
+        fontFace: SANS, fontSize: 10, color: BODY, valign: "top",
+      });
+    }
+  });
+
+  // STEP 03 — judgement bands
+  const x3 = M + 2 * (w4 + 0.34);
+  const bands = [
+    ["460 µm 미만", "여유 있음", GREEN, "E9F5F0"],
+    ["460 ~ 520 µm", "ISO 통과, 여유 없음", ORANGE, "FDF2E9"],
+    ["520 µm 초과", "부적합", RED, "FDECEA"],
+  ];
+  bands.forEach(([r, j, col, tint], i) => {
+    const y = 3.24 + i * 0.62;
+    s.addShape(pres.ShapeType.roundRect, {
+      x: x3 + 0.24, y, w: w4 - 0.48, h: 0.54, rectRadius: 0.07,
+      fill: { color: tint }, line: { width: 0 },
+    });
+    s.addText(r, {
+      x: x3 + 0.38, y: y + 0.04, w: w4 - 0.76, h: 0.26, margin: 0,
+      fontFace: SANS, fontSize: 11, bold: true, color: col, valign: "middle",
+    });
+    s.addText(j, {
+      x: x3 + 0.38, y: y + 0.28, w: w4 - 0.76, h: 0.22, margin: 0,
+      fontFace: SANS, fontSize: 9.5, color: BODY, valign: "middle",
+    });
+  });
+  s.addText("가운데 구간이 판단이 필요한 영역입니다.", {
+    x: x3 + 0.24, y: 5.06, w: w4 - 0.48, h: 0.2, margin: 0,
+    fontFace: SANS, fontSize: 9, italic: true, color: MUTED, valign: "middle",
+  });
+
+  // STEP 04 — fill-in cost comparison
+  const x4 = M + 3 * (w4 + 0.34);
+  const costs = [
+    ["플런저 · 배럴 1조 단가", "＿＿＿＿＿ 원"],
+    ["× 실린더 수", "＿＿＿ 기"],
+    ["첨가제 (50 t 벙커 기준)", "5 ~ 10 L"],
+  ];
+  costs.forEach(([k, v], i) => {
+    const y = 3.24 + i * 0.5;
+    s.addText(k, {
+      x: x4 + 0.24, y, w: w4 - 0.48, h: 0.22, margin: 0,
+      fontFace: SANS, fontSize: 9.5, color: BODY, valign: "middle",
+    });
+    s.addText(v, {
+      x: x4 + 0.24, y: y + 0.2, w: w4 - 0.48, h: 0.26, margin: 0,
+      fontFace: SANS, fontSize: 11.5, bold: true,
+      color: i === 2 ? GREEN : NAVY, valign: "middle",
+    });
+  });
+  s.addShape(pres.ShapeType.roundRect, {
+    x: x4 + 0.24, y: 4.78, w: w4 - 0.48, h: 0.48, rectRadius: 0.07,
+    fill: { color: NAVY }, line: { width: 0 },
+  });
+  s.addText("어느 쪽이 큽니까?", {
+    x: x4 + 0.24, y: 4.78, w: w4 - 0.48, h: 0.48, margin: 0,
+    fontFace: SANS, fontSize: 11.5, bold: true, color: ORANGE, align: "center", valign: "middle",
+  });
+
+  banner(s, "윤활성은 계기판에 뜨지 않습니다. 성적서를 열어보는 것 말고는 알 방법이 없습니다.", 5.46);
+  src(s, "ISO 8217 · EN 590 규격 한계 · 투입량은 Unitor™ DieselPower™ Lubricity 제품 매뉴얼 기준 (0.1~0.2 L/ton)", 6.46);
+  s.addNotes(
+    "이 장이 실무자를 움직이는 장입니다. 제품을 팔러 온 것이 아니라, 각자 배의 자료를 열어보게 만드는 것이 목적입니다.\n\n" +
+    "먼저 상단 질문으로 시작하십시오. 스페어 교체 주기가 짧아졌다는 감각은 기관장이라면 대부분 갖고 있습니다. 다만 정직하게 짚어야 할 것이 있습니다 — 연료 전환 시 펌프가 뻑뻑해지는 현상은 대개 열충격과 점도 급변 때문이지 윤활성 때문이 아닙니다. 이 둘을 섞어 말하면 아는 사람에게 바로 걸립니다. 윤활성의 신호는 급성 증상이 아니라 마모가 누적되어 교체 주기가 서서히 짧아지는 것입니다.\n\n" +
+    "핵심 메시지는 하나입니다. 촉매 미분, 수분, 슬러지는 배에서 눈으로 확인됩니다 — 필터 차압, 퓨리파이어 슬러지량, 육안 검사로 잡힙니다. 그런데 윤활성만은 본선에 아무 지표가 없습니다. 성적서가 돌아올 때는 이미 그 연료를 태운 뒤입니다. 그래서 사후 대응이 불가능하고 예방만 가능합니다.\n\n" +
+    "STEP 02에서 EN 590의 460은 자동차용 분사장비 기준에서 나온 값이라는 점을 밝히십시오. 선박 주기관에 그대로 들이대면 과장입니다. 그래서 우리 숫자를 믿으라고 하지 말고, 본선 엔진 매뉴얼의 허용치를 직접 확인하시라고 하십시오. 본인이 찾은 숫자가 우리가 제시한 숫자보다 훨씬 강하게 작용합니다.\n\n" +
+    "STEP 04는 일부러 비워 두었습니다. 스페어 단가는 선사마다 다르므로 각자 채우게 하십시오. 스스로 계산한 금액이 설득의 마지막 조각입니다."
+  );
+}
+
 pres.writeFile({ fileName: "/tmp/claude-0/-home-user-github-test/9f72a13f-ac8c-5519-89c5-583ea05e90c6/scratchpad/fuel_training_deck.pptx" })
   .then(f => console.log("WROTE " + f));
