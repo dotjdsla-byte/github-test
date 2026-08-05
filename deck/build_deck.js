@@ -1078,89 +1078,98 @@ function src(s, txt, y) {
    ======================================================================= */
 {
   const s = pres.addSlide();
-  base(s, "15", "14   윤활성 ①", "황을 뺐더니 윤활성이 함께 빠졌습니다");
+  base(s, "15", "14   윤활성 ①", "탈황 공정 중 천연 윤활 역할을 하던 성분 동시 제거", { titleSize: 32 });
 
-  card(s, M, 1.74, 6.0, 3.42);
-  label(s, "WHY IT HAPPENS", M + 0.28, 1.96, 4.4, BLUE);
-  s.addText("규제가 만든 연쇄", {
-    x: M + 0.28, y: 2.2, w: 5.44, h: 0.32, margin: 0,
-    fontFace: SANS, fontSize: 14, bold: true, color: NAVY, valign: "middle",
-  });
+  card(s, M, 1.74, 4.72, 3.56);
+  label(s, "WHY IT HAPPENS", M + 0.26, 1.96, 4.2, BLUE);
   const chainL = [
     ["ECA · SECA 확대", "저유황 디젤 사용 의무"],
-    ["탈황 정제 강화", "황을 걷어내는 공정"],
+    ["탈황 정제", "황을 걷어내는 공정"],
     ["극성 성분 동반 제거", "천연 윤활 성분이 같이 빠짐"],
     ["윤활성 저하", "금속끼리 직접 닿기 시작"],
   ];
   chainL.forEach(([t, d], i) => {
-    const y = 2.62 + i * 0.6;
+    const y = 2.36 + i * 0.72;
     s.addShape(pres.ShapeType.roundRect, {
-      x: M + 0.28, y: y + 0.06, w: 0.3, h: 0.3, rectRadius: 0.15,
+      x: M + 0.26, y: y + 0.04, w: 0.3, h: 0.3, rectRadius: 0.15,
       fill: { color: i === 3 ? RED : BLUE }, line: { width: 0 },
     });
     s.addText(String(i + 1), {
-      x: M + 0.28, y: y + 0.06, w: 0.3, h: 0.3, margin: 0,
+      x: M + 0.26, y: y + 0.04, w: 0.3, h: 0.3, margin: 0,
       fontFace: SANS, fontSize: 10, bold: true, color: WHITE, align: "center", valign: "middle",
     });
     s.addText(t, {
-      x: M + 0.7, y: y + 0.02, w: 2.3, h: 0.38, margin: 0,
-      fontFace: SANS, fontSize: 12, bold: true, color: i === 3 ? RED : NAVY, valign: "middle",
+      x: M + 0.68, y, w: 3.78, h: 0.34, margin: 0,
+      fontFace: SANS, fontSize: 12.5, bold: true, color: i === 3 ? RED : NAVY, valign: "middle",
     });
     s.addText(d, {
-      x: M + 3.04, y: y + 0.02, w: 2.68, h: 0.38, margin: 0,
+      x: M + 0.68, y: y + 0.32, w: 3.78, h: 0.28, margin: 0,
       fontFace: SANS, fontSize: 10.5, color: BODY, valign: "middle",
     });
     if (i < 3) {
       s.addText("▼", {
-        x: M + 0.28, y: y + 0.38, w: 0.3, h: 0.2, margin: 0,
+        x: M + 0.26, y: y + 0.38, w: 0.3, h: 0.26, margin: 0,
         fontFace: SANS, fontSize: 7, color: "B9C4D6", align: "center", valign: "middle",
       });
     }
   });
 
-  card(s, M + 6.32, 1.74, 5.77, 3.42);
-  label(s, "MEASURED RESULT — ULSD ALONE", M + 6.6, 1.96, 4.6, RED);
-  s.addText(
-    [
-      { text: "535", options: { fontFace: SANS, fontSize: 52, bold: true, color: RED } },
-      { text: " ± 50 µm", options: { fontFace: SANS, fontSize: 15, color: MUTED } },
-    ],
-    { x: M + 6.6, y: 2.24, w: 5.21, h: 0.86, margin: 0, valign: "middle" }
-  );
-  s.addText("HFRR 마모흔 직경 (ISO 12156-1, WS1.4)", {
-    x: M + 6.6, y: 3.08, w: 5.21, h: 0.28, margin: 0,
-    fontFace: SANS, fontSize: 11, bold: true, color: BODY, valign: "middle",
+  card(s, M + 5.04, 1.74, 7.05, 3.56);
+  label(s, "IMPACT ON MACHINERY — PLUNGER & INJECTOR", M + 5.32, 1.96, 5.6, RED);
+  s.addText("윤활성을 잃은 MGO를 그대로 쓰면 금속과 금속이 직접 마찰합니다", {
+    x: M + 5.32, y: 2.2, w: 6.49, h: 0.3, margin: 0,
+    fontFace: SANS, fontSize: 12.5, bold: true, color: NAVY, valign: "middle",
   });
 
-  const lim = [["ISO 8217", "520 µm", "초과 — 부적합"], ["EN 590", "460 µm", "초과 — 부적합"]];
-  lim.forEach(([nm, v, judge], i) => {
-    const y = 3.46 + i * 0.42;
+  const impacts = [
+    ["연료 분사 펌프 플런저 고착", "Seizure",
+      [{ text: "플런저와 배럴 사이 공차는 불과 ", c: BODY },
+       { text: "수 µm", c: RED, b: true },
+       { text: " 단위입니다. 별도 윤활유 없이 MGO 자체가 윤활제 역할을 하는데, 유막이 깨지면 금속 응착과 ", c: BODY },
+       { text: "스커핑(Scuffing)", c: NAVY, b: true },
+       { text: "이 일어나 펌프가 굳습니다.", c: BODY }]],
+    ["인젝터 노즐 마모 및 누설", "Leakage",
+      [{ text: "고압으로 작동하는 니들 밸브가 마모되어 기밀을 잃습니다. ", c: BODY },
+       { text: "분사 패턴(Atomization)", c: NAVY, b: true },
+       { text: "이 무너져 불완전 연소와 스모크로 이어집니다.", c: BODY }]],
+    ["HFRR 마모흔 직경 초과", "ISO 12156-1",
+      [{ text: "ISO 12156-1 윤활성 시험에서 ", c: BODY },
+       { text: "535 µm", c: RED, b: true },
+       { text: " 측정 — ISO 8217 한계 520 µm, EN 590 한계 460 µm를 ", c: BODY },
+       { text: "모두 초과", c: RED, b: true },
+       { text: "합니다.", c: BODY }]],
+  ];
+  impacts.forEach(([t, tag, parts], i) => {
+    const y = 2.62 + i * 0.88;
+    if (i > 0) {
+      s.addShape(pres.ShapeType.line, {
+        x: M + 5.32, y: y - 0.06, w: 6.49, h: 0, line: { color: LINE, width: 0.75 },
+      });
+    }
     s.addShape(pres.ShapeType.roundRect, {
-      x: M + 6.6, y, w: 5.21, h: 0.36, rectRadius: 0.06,
-      fill: { color: "FDECEA" }, line: { width: 0 },
+      x: M + 5.32, y: y + 0.02, w: 0.28, h: 0.28, rectRadius: 0.14,
+      fill: { color: RED }, line: { width: 0 },
     });
-    s.addText(nm, {
-      x: M + 6.74, y, w: 1.4, h: 0.36, margin: 0,
-      fontFace: SANS, fontSize: 10.5, bold: true, color: NAVY, valign: "middle",
+    s.addText(String(i + 1), {
+      x: M + 5.32, y: y + 0.02, w: 0.28, h: 0.28, margin: 0,
+      fontFace: SANS, fontSize: 9.5, bold: true, color: WHITE, align: "center", valign: "middle",
     });
-    s.addText("한계 " + v, {
-      x: M + 8.2, y, w: 1.6, h: 0.36, margin: 0,
-      fontFace: SANS, fontSize: 10.5, color: BODY, valign: "middle",
-    });
-    s.addText(judge, {
-      x: M + 9.9, y, w: 1.8, h: 0.36, margin: 0,
-      fontFace: SANS, fontSize: 10.5, bold: true, color: RED, align: "right", valign: "middle",
-    });
+    s.addText(
+      [
+        { text: t + "  ", options: { fontFace: SANS, fontSize: 12, bold: true, color: NAVY } },
+        { text: tag, options: { fontFace: SANS, fontSize: 9.5, italic: true, color: MUTED } },
+      ],
+      { x: M + 5.7, y, w: 6.11, h: 0.32, margin: 0, valign: "middle" }
+    );
+    s.addText(
+      parts.map(p => ({ text: p.text, options: { fontFace: SANS, fontSize: 10, bold: !!p.b, color: p.c } })),
+      { x: M + 5.7, y: y + 0.3, w: 6.11, h: 0.5, margin: 0, lineSpacing: 14, valign: "top" }
+    );
   });
 
-  s.addText("손상 부위: 연료펌프 플런저 · 인젝터 — Section 01 슬라이드 03의 New Orleans 사례와 같은 부위입니다.", {
-    x: M + 6.6, y: 4.36, w: 5.21, h: 0.56, margin: 0, lineSpacing: 15,
-    fontFace: SANS, fontSize: 10, italic: true, color: MUTED, valign: "middle",
-  });
-
-  banner(s, "윤활성은 분리기로 개선할 수 없습니다. 입자가 아니라 연료의 화학적 성질이기 때문입니다.", 5.36);
-  src(s, "출처: Unitor™ DieselPower™ Lubricity 제품 매뉴얼 (ISO 12156-1 HFRR 시험) · ISO 8217 / EN 590 규격 한계", 6.36);
-  s.addNotes("Section 01에서 그은 경계선의 가장 깨끗한 사례입니다. 윤활성은 고형분이나 물처럼 분리해낼 수 있는 대상이 아니라 연료 자체의 화학적 성질입니다. 원심분리기를 아무리 잘 돌려도 535 µm는 535 µm 그대로입니다. 그리고 이 시험의 ULSD는 다른 ISO 항목은 모두 만족한 정상 연료입니다 — 슬라이드 03에서 본 착시와 정확히 같은 구조입니다.");
+  banner(s, "윤활성은 분리기로 개선할 수 없습니다. 입자가 아니라 연료의 화학적 성질이기 때문입니다.", 5.48);
+  src(s, "출처: Unitor™ DieselPower™ Lubricity 제품 매뉴얼 (ISO 12156-1 HFRR 시험) · ISO 8217 / EN 590 규격 한계", 6.48);
+  s.addNotes("왼쪽은 왜 이런 일이 생기는지, 오른쪽은 그래서 본선에서 무엇이 망가지는지입니다. 세 번째 항목이 앞의 두 가지를 숫자로 확인해 주는 구조입니다. 플런저-배럴 공차가 수 마이크론이라는 점을 강조하십시오 — 유막 두께가 그보다 얇아지는 순간 바로 금속끼리 닿습니다. 그리고 이 ULSD는 다른 ISO 항목은 전부 만족한 정상 연료입니다. 슬라이드 03의 착시와 같은 구조이고, 원심분리기로는 535 µm를 단 1 µm도 낮출 수 없습니다.");
 }
 
 /* =======================================================================
