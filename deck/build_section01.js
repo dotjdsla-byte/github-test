@@ -627,7 +627,7 @@ function src(s, txt, y) {
     { x: M + 0.3, y: 4.70, w: CW - 0.6, h: 0.70, margin: 0, valign: "middle" }
   );
 
-  banner(s, "MGO 공급이 늘었다고 안심할 수 없습니다. 인화점 미달은 품질 문제가 아니라 안전 문제입니다.", 5.56);
+  banner(s, "ECA 출입 시 연료 전환은 점도와 온도를 급격히 흔듭니다. 그만큼 계통이 예민해집니다.", 5.56);
   src(s, "출처: Viswa Group 2025, Figure 9 · Figure 16 (MGO 부적합 항목 및 운항 이슈 분포)", 6.50);
   s.addNotes("MGO는 '깨끗한 연료'라는 인식이 있지만 운항 이슈의 67%가 필터 막힘입니다. 특히 인화점 미달 28%는 MARPOL·SOLAS상 60°C 최저 기준과 직결되는 안전 항목입니다. 바이오 혼합 MGO는 부적합률이 일반 MGO의 6배입니다.");
 }
@@ -696,7 +696,7 @@ function src(s, txt, y) {
       fontFace: SANS, fontSize: 10, color: "AFC0D8", valign: "top",
     });
   });
-  s.addText("→ Section 02 에서 다룹니다", {
+  s.addText("→ 관리 범위를 분리기 밖으로 넓혀야 합니다", {
     x: M + 6.51, y: 4.82, w: 5.3, h: 0.28, margin: 0,
     fontFace: SANS, fontSize: 10.5, bold: true, italic: true, color: ORANGE, valign: "middle",
   });
@@ -704,6 +704,157 @@ function src(s, txt, y) {
   banner(s, "일상 분석으로 검출되지 않는 유해 물질은 어떤 연료 정화 시스템의 처리 범위 밖에 있습니다.", 5.46);
   src(s, "출처: CIMAC Guideline 2024 §6.3 · §6.4 · §7.2 — 인용문은 §6.4 원문", 6.46);
   s.addNotes("Section 01의 결론입니다. 분리기를 잘 돌리는 것은 필수지만, 분리기가 손댈 수 없는 영역이 분명히 존재한다는 것을 CIMAC이 직접 명시하고 있습니다. Section 02는 바로 이 영역을 다룹니다 — 분리기의 대체가 아니라, 분리기가 닿지 못하는 구간에 대한 보완입니다.");
+}
+
+/* =======================================================================
+   S10 — Tank to Wake 프레임
+   ======================================================================= */
+{
+  const s = pres.addSlide();
+  base(s, "10", "09   프레임", "Tank to Wake — 탱크에서 배기까지");
+
+  const stages = [
+    ["PRE-COMBUSTION", "연소 전", "저장 · 안정성 · 호환성",
+      ["연료가 엔진에 도달하기 전 단계", "슬러지로 빠져나가는 손실", "정유기 · 필터 부하"],
+      "Section 01 근거  05 · 06 · 07", BLUE, "EEF2F9"],
+    ["COMBUSTION", "연소", "연소 효율 · 무화 · 에너지 변환",
+      ["연료가 실제로 일로 바뀌는 단계", "점도 · 잔류탄소분의 영향", "분사 상태와 착화 품질"],
+      "Section 01 근거  04", ORANGE, "FDF2E9"],
+    ["POST-COMBUSTION", "연소 후", "매연 제어 · 열회수 · 계통 청결",
+      ["배기가 계통을 빠져나가는 단계", "터보차저 · 열회수면 퇴적", "청소 주기와 배압"],
+      "Section 01 근거  03", GREEN, "E9F5F0"],
+  ];
+  const w3 = (CW - 0.42 * 2) / 3;
+  stages.forEach(([en, ko, subtitle, bullets, ref, col, tint], i) => {
+    const x = M + i * (w3 + 0.42);
+    card(s, x, 1.74, w3, 3.30);
+    label(s, en, x + 0.26, 1.96, w3 - 0.52, col);
+    s.addText(ko, {
+      x: x + 0.26, y: 2.2, w: w3 - 0.52, h: 0.42, margin: 0,
+      fontFace: SERIF, fontSize: 22, color: NAVY, valign: "middle",
+    });
+    s.addText(subtitle, {
+      x: x + 0.26, y: 2.64, w: w3 - 0.52, h: 0.28, margin: 0,
+      fontFace: SANS, fontSize: 11, bold: true, color: col, valign: "middle",
+    });
+    bullets.forEach((b, j) => {
+      const by = 3.02 + j * 0.4;
+      s.addShape(pres.ShapeType.roundRect, {
+        x: x + 0.28, y: by + 0.1, w: 0.12, h: 0.12, rectRadius: 0.06,
+        fill: { color: col }, line: { width: 0 },
+      });
+      s.addText(b, {
+        x: x + 0.52, y: by, w: w3 - 0.78, h: 0.34, margin: 0,
+        fontFace: SANS, fontSize: 10.5, color: BODY, valign: "middle",
+      });
+    });
+    s.addShape(pres.ShapeType.roundRect, {
+      x: x + 0.26, y: 4.36, w: w3 - 0.52, h: 0.44, rectRadius: 0.07,
+      fill: { color: tint }, line: { width: 0 },
+    });
+    s.addText(ref, {
+      x: x + 0.26, y: 4.36, w: w3 - 0.52, h: 0.44, margin: 0,
+      fontFace: SANS, fontSize: 9.5, bold: true, charSpacing: 0.6,
+      color: col, align: "center", valign: "middle",
+    });
+    if (i < 2) {
+      s.addText("▶", {
+        x: x + w3 + 0.03, y: 3.2, w: 0.36, h: 0.4, margin: 0,
+        fontFace: SANS, fontSize: 14, color: "B9C4D6", align: "center", valign: "middle",
+      });
+    }
+  });
+
+  banner(s, "Well-to-Wake는 규제 보고의 틀이고, Tank-to-Wake는 본선이 실제로 통제할 수 있는 구간입니다.", 5.24);
+  src(s, "출처: Wilhelmsen Ships Service, “How holistic fuel management supports cleaner and more efficient vessel operations” (Tank to Wake)", 6.24);
+  s.addNotes("여기서 관점을 바꿉니다. 지금까지 본 문제들은 흩어진 개별 사건이 아니라 하나의 계통에서 일어나는 일입니다. Well-to-Wake는 추출·정제·수송까지 포함하는 규제 보고의 틀입니다. 반면 Tank-to-Wake는 연료가 우리 탱크에 들어온 순간부터 배기가 굴뚝을 빠져나갈 때까지 — 즉 본선이 실제로 손댈 수 있는 구간입니다. Section 01에서 본 데이터가 이 세 단계에 각각 어디에 해당하는지 카드 하단에 표시했습니다.");
+}
+
+/* =======================================================================
+   S11 — 손실의 누적
+   ======================================================================= */
+{
+  const s = pres.addSlide();
+  base(s, "11", "10   결론", "손실은 단계마다 쌓입니다");
+
+  const chain = [
+    ["저장 중 열화", "연료가 탱크 안에서\n계속 변합니다", BLUE],
+    ["슬러지 발생", "엔진에 도달하지 못한 연료\n— 손실 확정", "6E93BF"],
+    ["연소 품질 저하", "착화 불량 · 매연 증가", ORANGE],
+    ["열회수면 퇴적", "이후 모든 연소 사이클의\n효율이 함께 떨어집니다", RED],
+  ];
+  const cwd = (CW - 0.5 * 3) / 4;
+  chain.forEach(([t, d, col], i) => {
+    const x = M + i * (cwd + 0.5);
+    card(s, x, 1.74, cwd, 1.62);
+    s.addShape(pres.ShapeType.roundRect, {
+      x: x + 0.26, y: 1.94, w: 0.34, h: 0.34, rectRadius: 0.17,
+      fill: { color: col }, line: { width: 0 },
+    });
+    s.addText(String(i + 1), {
+      x: x + 0.26, y: 1.94, w: 0.34, h: 0.34, margin: 0,
+      fontFace: SANS, fontSize: 11, bold: true, color: WHITE, align: "center", valign: "middle",
+    });
+    s.addText(t, {
+      x: x + 0.7, y: 1.94, w: cwd - 0.96, h: 0.34, margin: 0,
+      fontFace: SANS, fontSize: 12.5, bold: true, color: NAVY, valign: "middle",
+    });
+    s.addText(d, {
+      x: x + 0.26, y: 2.4, w: cwd - 0.52, h: 0.76, margin: 0, lineSpacing: 15,
+      fontFace: SANS, fontSize: 10.5, color: BODY, valign: "top",
+    });
+    if (i < 3) {
+      s.addText("▶", {
+        x: x + cwd + 0.05, y: 2.35, w: 0.4, h: 0.4, margin: 0,
+        fontFace: SANS, fontSize: 13, color: "B9C4D6", align: "center", valign: "middle",
+      });
+    }
+  });
+
+  card(s, M, 3.58, 5.86, 1.86, NAVY);
+  s.addText("그래서 한 곳만 손봐서는 안 됩니다", {
+    x: M + 0.3, y: 3.8, w: 5.26, h: 0.34, margin: 0,
+    fontFace: SANS, fontSize: 14, bold: true, color: ORANGE, valign: "middle",
+  });
+  s.addText(
+    [
+      { text: "앞 단계의 손실이 뒤 단계의 손실로 그대로 넘어갑니다. ", options: { fontFace: SANS, fontSize: 11.5, color: WHITE, breakLine: true } },
+      { text: "저장에서 잃은 연료는 연소에서 되찾을 수 없고, 연소에서 만든 매연은 열회수 효율을 계속 갉아먹습니다.", options: { fontFace: SANS, fontSize: 11.5, color: "D6E0EE", breakLine: true } },
+      { text: " ", options: { fontSize: 7, breakLine: true } },
+      { text: "계통은 서로 연결되어 있고, 하나로 관리할 때 반응합니다.", options: { fontFace: SANS, fontSize: 11.5, bold: true, color: WHITE } },
+    ],
+    { x: M + 0.3, y: 4.2, w: 5.26, h: 1.1, margin: 0, lineSpacing: 17, valign: "top" }
+  );
+
+  card(s, M + 6.23, 3.58, 5.86, 1.86);
+  label(s, "WHAT INTEGRATED MANAGEMENT DELIVERS", M + 6.51, 3.78, 5.3, BLUE);
+  const outcomes = [
+    ["슬러지 손실 감소", "폐기 연료 ↓"],
+    ["SFOC 저하", "같은 출력에 연료 ↓"],
+    ["비계획 정비 감소", "정유기 · 필터 · 펌프"],
+    ["청소 주기 연장", "계통 청결 유지"],
+    ["CII 반영", "문서화된 개선"],
+  ];
+  outcomes.forEach(([t, d], i) => {
+    const col = i % 2, row = Math.floor(i / 2);
+    const x = M + 6.51 + col * 2.68;
+    const y = 4.08 + row * 0.44;
+    s.addShape(pres.ShapeType.roundRect, {
+      x, y: y + 0.09, w: 0.13, h: 0.13, rectRadius: 0.065,
+      fill: { color: GREEN }, line: { width: 0 },
+    });
+    s.addText(
+      [
+        { text: t + "  ", options: { fontFace: SANS, fontSize: 10.5, bold: true, color: NAVY } },
+        { text: d, options: { fontFace: SANS, fontSize: 9, color: MUTED } },
+      ],
+      { x: x + 0.24, y, w: 2.44, h: 0.32, margin: 0, valign: "middle" }
+    );
+  });
+
+  banner(s, "목표는 벙커링한 모든 연료가 추진력으로 온전히 쓰일 기회를 갖게 하는 것입니다.", 5.62);
+  src(s, "출처: Wilhelmsen Ships Service, Tank to Wake 및 Pre-combustion treatment 자료 · Section 01 실측 데이터", 6.62);
+  s.addNotes("Section 01의 마지막 장입니다. 핵심은 손실이 단계마다 누적된다는 점입니다. 저장 중 열화로 슬러지가 되면 그 연료는 엔진에 도달조차 못 합니다. 연소가 나쁘면 매연이 열회수면에 쌓여 이후 모든 사이클의 효율을 떨어뜨립니다. 그래서 한 지점만 개선하는 것으로는 부족하고, Tank-to-Wake 전체를 하나로 관리해야 합니다. Section 02부터 각 단계를 순서대로 다룹니다.");
 }
 
 pres.writeFile({ fileName: "/tmp/claude-0/-home-user-github-test/9f72a13f-ac8c-5519-89c5-583ea05e90c6/scratchpad/fuel_section01.pptx" })
