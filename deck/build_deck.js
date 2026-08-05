@@ -1080,7 +1080,7 @@ function src(s, txt, y) {
   const s = pres.addSlide();
   base(s, "15", "14   윤활성 ①", "탈황 공정 중 천연 윤활 역할을 하던 성분 동시 제거", { titleSize: 32 });
 
-  card(s, M, 1.74, 4.72, 3.56);
+  card(s, M, 1.74, 4.72, 3.66);
   label(s, "WHY IT HAPPENS", M + 0.26, 1.96, 4.2, BLUE);
   const chainL = [
     ["ECA · SECA 확대", "저유황 디젤 사용 의무"],
@@ -1114,7 +1114,7 @@ function src(s, txt, y) {
     }
   });
 
-  card(s, M + 5.04, 1.74, 7.05, 3.56);
+  card(s, M + 5.04, 1.74, 7.05, 3.66);
   label(s, "IMPACT ON MACHINERY — PLUNGER & INJECTOR", M + 5.32, 1.96, 5.6, RED);
   s.addText("윤활성을 잃은 MGO를 그대로 쓰면 금속과 금속이 직접 마찰합니다", {
     x: M + 5.32, y: 2.2, w: 6.49, h: 0.3, margin: 0,
@@ -1133,14 +1133,14 @@ function src(s, txt, y) {
        { text: "분사 패턴(Atomization)", c: NAVY, b: true },
        { text: "이 무너져 불완전 연소와 스모크로 이어집니다.", c: BODY }]],
     ["HFRR 마모흔 직경 초과", "ISO 12156-1",
-      [{ text: "ISO 12156-1 윤활성 시험에서 ", c: BODY },
+      [{ text: "연료가 보호막을 만들지 못한다는 지표입니다. ", c: BODY },
        { text: "535 µm", c: RED, b: true },
-       { text: " 측정 — ISO 8217 한계 520 µm, EN 590 한계 460 µm를 ", c: BODY },
+       { text: " — ISO 8217 520, EN 590 460 을 ", c: BODY },
        { text: "모두 초과", c: RED, b: true },
        { text: "합니다.", c: BODY }]],
   ];
   impacts.forEach(([t, tag, parts], i) => {
-    const y = 2.62 + i * 0.88;
+    const y = 2.60 + i * 0.82;
     if (i > 0) {
       s.addShape(pres.ShapeType.line, {
         x: M + 5.32, y: y - 0.06, w: 6.49, h: 0, line: { color: LINE, width: 0.75 },
@@ -1163,13 +1163,30 @@ function src(s, txt, y) {
     );
     s.addText(
       parts.map(p => ({ text: p.text, options: { fontFace: SANS, fontSize: 10, bold: !!p.b, color: p.c } })),
-      { x: M + 5.7, y: y + 0.3, w: 6.11, h: 0.5, margin: 0, lineSpacing: 14, valign: "top" }
+      { x: M + 5.7, y: y + 0.3, w: 6.11, h: 0.44, margin: 0, lineSpacing: 14, valign: "top" }
     );
   });
 
-  banner(s, "윤활성은 분리기로 개선할 수 없습니다. 입자가 아니라 연료의 화학적 성질이기 때문입니다.", 5.48);
-  src(s, "출처: Unitor™ DieselPower™ Lubricity 제품 매뉴얼 (ISO 12156-1 HFRR 시험) · ISO 8217 / EN 590 규격 한계", 6.48);
-  s.addNotes("왼쪽은 왜 이런 일이 생기는지, 오른쪽은 그래서 본선에서 무엇이 망가지는지입니다. 세 번째 항목이 앞의 두 가지를 숫자로 확인해 주는 구조입니다. 플런저-배럴 공차가 수 마이크론이라는 점을 강조하십시오 — 유막 두께가 그보다 얇아지는 순간 바로 금속끼리 닿습니다. 그리고 이 ULSD는 다른 ISO 항목은 전부 만족한 정상 연료입니다. 슬라이드 03의 착시와 같은 구조이고, 원심분리기로는 535 µm를 단 1 µm도 낮출 수 없습니다.");
+  s.addShape(pres.ShapeType.roundRect, {
+    x: M + 5.32, y: 4.98, w: 6.49, h: 0.38, rectRadius: 0.06,
+    fill: { color: "EEF2F9" }, line: { width: 0 },
+  });
+  s.addText("마모흔은 시험구(⌀6 mm 볼)에 생긴 자국의 지름이며 펌프 내부 치수가 아닙니다. 한계선은 실제 분사장비 고장 이력에서 정해졌습니다.", {
+    x: M + 5.44, y: 4.98, w: 6.25, h: 0.38, margin: 0, lineSpacing: 13,
+    fontFace: SANS, fontSize: 9.5, italic: true, color: BLUE, valign: "middle",
+  });
+
+  banner(s, "윤활성은 분리기로 개선할 수 없습니다. 입자가 아니라 연료의 화학적 성질이기 때문입니다.", 5.58);
+  src(s, "출처: Unitor™ DieselPower™ Lubricity 제품 매뉴얼 (ISO 12156-1 HFRR 시험) · ISO 8217 / EN 590 규격 한계", 6.54);
+  s.addNotes(
+    "왼쪽은 왜 이런 일이 생기는지, 오른쪽은 그래서 본선에서 무엇이 망가지는지입니다. 플런저-배럴 공차가 수 마이크론이라는 점을 강조하십시오 — 유막이 그보다 얇아지는 순간 금속끼리 닿습니다.\n\n" +
+    "[예상 질문] \"공차가 수 µm인데 535 µm니 355 µm니 하는 게 무슨 의미가 있나?\"\n" +
+    "— 아주 좋은 질문이고 반드시 나옵니다. 답은 세 가지입니다.\n\n" +
+    "1) 535 µm는 깊이도 틈새도 아닙니다. ISO 12156-1은 지름 6 mm 강구를 연료 속에서 강판에 60°C·200 g·50 Hz로 75분 문지른 뒤, 볼에 생긴 자국의 지름을 재는 시험입니다. 6,000 µm 볼에 생긴 535 µm 자국이니 볼 지름의 9% 수준입니다. 펌프 안에 535 µm짜리 치수는 없습니다. 참고로 구면 기하로 깊이를 환산하면 535 µm는 약 12 µm, 355 µm는 약 5 µm입니다 — 공차와 같은 자릿수입니다.\n\n" +
+    "2) 더 중요한 것은 이 값이 치수가 아니라 지표라는 점입니다. 펌프 안에서 실제로 문제되는 것은 유막 두께 대 표면 거칠기이고, 둘 다 서브미크론입니다. HFRR은 그 유막을 연료가 만들어낼 수 있는지를 잽니다. '당신 펌프가 535 µm 닳는다'가 아니라 '이 연료는 보호막을 못 만든다'는 뜻입니다.\n\n" +
+    "3) 520·460이라는 한계선은 공차에서 유도한 값이 아니라 실제 고장 이력에서 나온 값입니다. 연료분사장비 제조사들이 그 위에서 고장이 급증한다는 이유로 460 µm를 권고했고, ISO 8217은 선박용 증류유 기준으로 520 µm를 채택했습니다. 따라서 535 → 355의 의미는 '마모가 180 µm 줄었다'가 아니라 '고장이 몰려 있던 구간 밖으로 나왔다'입니다.\n\n" +
+    "덧붙여, 이 ULSD는 다른 ISO 항목은 전부 만족한 정상 연료입니다. 슬라이드 03의 착시와 같은 구조이고, 원심분리기로는 535 µm를 단 1 µm도 낮출 수 없습니다."
+  );
 }
 
 /* =======================================================================
@@ -1264,9 +1281,14 @@ function src(s, txt, y) {
     fontFace: SANS, fontSize: 9.5, bold: true, color: RED, align: "center", valign: "middle",
   });
 
-  banner(s, "150 ppm 투입으로 535 → 355 µm. 마모흔 34% 감소, 두 규격을 모두 여유 있게 통과합니다.", 5.36);
+  banner(s, "100 ppm만으로도 두 규격을 모두 통과합니다. 중요한 것은 감소폭이 아니라 합격선을 넘었다는 사실입니다.", 5.36);
   src(s, "출처: Unitor™ DieselPower™ Lubricity 제품 매뉴얼 (Product No. 650-779094) — 사내 Lab Test 결과", 6.36);
-  s.addNotes("막대 세 개가 전부입니다. 무처리 ULSD는 535 µm로 ISO 8217 520을 넘겨 부적합입니다. 100 ppm에서 396, 150 ppm에서 355로 떨어지고 두 규격 모두 통과합니다. 150 ppm 기준 33.6% 개선인데, 이 수치는 Lloyd's Register Product Verification Scheme 인증으로 공표된 34%와 일치합니다. 재질 주의는 실무에서 중요합니다 — 투입 계통의 씰과 개스킷 재질을 먼저 확인해야 합니다.");
+  s.addNotes(
+    "막대 세 개가 전부입니다. 무처리 ULSD는 535 µm로 ISO 8217 520을 넘겨 부적합입니다. 100 ppm에서 396, 150 ppm에서 355로 떨어지고 두 규격 모두 통과합니다.\n\n" +
+    "여기서 말을 정확히 하십시오. 이 시험은 연속적으로 좋아지는 양을 보여주는 것이 아니라 합격선을 넘느냐 마느냐를 보여줍니다. 355와 396의 41 µm 차이가 펌프 수명 차이로 직결된다고 말하면 과장입니다. 핵심은 두 값 모두 고장이 몰려 있던 구간 밖에 있다는 것입니다.\n\n" +
+    "150 ppm 기준 감소율은 33.6%이고, 이 수치는 Lloyd's Register Product Verification Scheme 인증으로 공표된 34%와 일치합니다 — 사내 시험과 제3자 인증이 서로를 뒷받침합니다.\n\n" +
+    "재질 주의는 실무에서 중요합니다. 투입 계통의 씰과 개스킷 재질을 먼저 확인해야 합니다."
+  );
 }
 
 pres.writeFile({ fileName: "/tmp/claude-0/-home-user-github-test/9f72a13f-ac8c-5519-89c5-583ea05e90c6/scratchpad/fuel_training_deck.pptx" })
