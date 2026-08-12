@@ -1,0 +1,439 @@
+<title>MLA 1 윤활 노트</title>
+<style>
+/* ============================================================
+   Palette — drawn from the lecture slides' own world:
+   navy console ground, oil amber, copper (Cu wear metal),
+   steel blue (instrument), with a blue-biased neutral.
+   ============================================================ */
+:root {
+  --ground:      #F5F7F9;
+  --surface:     #FFFFFF;
+  --surface-sub: #ECEFF3;
+  --mat:         #101826;   /* dark mat behind slide captures, both themes */
+  --ink:         #131A23;
+  --ink-soft:    #454F5C;
+  --ink-faint:   #6E7885;
+  --rule:        #D7DDE4;
+  --rule-soft:   #E5E9EE;
+  --amber:       #A9660A;   /* oil / 보강 */
+  --amber-wash:  #FBF1E0;
+  --steel:       #245A80;   /* instrument / 원 메모 */
+  --steel-wash:  #E8F0F6;
+  --copper:      #9C3D1E;   /* 정정 */
+  --copper-wash: #FAEBE5;
+  --verdant:     #1B6355;   /* 확인 */
+  --verdant-wash:#E4F1ED;
+  --shadow:      0 1px 2px rgba(19,26,35,.05), 0 8px 24px -12px rgba(19,26,35,.18);
+
+  --sans: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR",
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, "Cascadia Mono",
+          Consolas, "Noto Sans KR", monospace;
+
+  --measure: 70ch;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground:      #0C1219;
+    --surface:     #121A24;
+    --surface-sub: #18222E;
+    --mat:         #0A1017;
+    --ink:         #DBE3EB;
+    --ink-soft:    #A2AEBB;
+    --ink-faint:   #77828F;
+    --rule:        #263241;
+    --rule-soft:   #1D2733;
+    --amber:       #E0A24C;
+    --amber-wash:  #241C0F;
+    --steel:       #7FB3D8;
+    --steel-wash:  #101E2A;
+    --copper:      #DE8666;
+    --copper-wash: #26140F;
+    --verdant:     #6FBFA8;
+    --verdant-wash:#0E211D;
+    --shadow:      0 1px 2px rgba(0,0,0,.4), 0 10px 30px -14px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"] {
+  --ground:      #0C1219;
+  --surface:     #121A24;
+  --surface-sub: #18222E;
+  --mat:         #0A1017;
+  --ink:         #DBE3EB;
+  --ink-soft:    #A2AEBB;
+  --ink-faint:   #77828F;
+  --rule:        #263241;
+  --rule-soft:   #1D2733;
+  --amber:       #E0A24C;
+  --amber-wash:  #241C0F;
+  --steel:       #7FB3D8;
+  --steel-wash:  #101E2A;
+  --copper:      #DE8666;
+  --copper-wash: #26140F;
+  --verdant:     #6FBFA8;
+  --verdant-wash:#0E211D;
+  --shadow:      0 1px 2px rgba(0,0,0,.4), 0 10px 30px -14px rgba(0,0,0,.6);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16.5px;
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- masthead ---------- */
+.masthead {
+  border-bottom: 1px solid var(--rule);
+  background: var(--surface);
+  padding: 40px 28px 30px;
+}
+.masthead__in { max-width: 1180px; margin: 0 auto; }
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--steel);
+  margin: 0 0 14px;
+  display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: baseline;
+}
+.eyebrow b { color: var(--ink-faint); font-weight: 500; }
+h1 {
+  font-size: clamp(28px, 4.6vw, 44px);
+  line-height: 1.2;
+  letter-spacing: -.02em;
+  font-weight: 800;
+  margin: 0 0 14px;
+  text-wrap: balance;
+}
+.dek {
+  margin: 0;
+  max-width: 62ch;
+  color: var(--ink-soft);
+  font-size: 16px;
+}
+.legend {
+  margin: 26px 0 0;
+  display: flex; flex-wrap: wrap; gap: 8px;
+  list-style: none; padding: 0;
+}
+.legend li {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: .04em;
+  padding: 5px 10px;
+  border-radius: 3px;
+  border: 1px solid var(--rule);
+  color: var(--ink-soft);
+  background: var(--surface-sub);
+}
+.legend li i { font-style: normal; font-weight: 700; }
+.legend li.l-memo i { color: var(--steel); }
+.legend li.l-add  i { color: var(--amber); }
+.legend li.l-fix  i { color: var(--copper); }
+
+/* ---------- shell ---------- */
+.shell {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 28px 96px;
+  display: grid;
+  grid-template-columns: 244px minmax(0, 1fr);
+  gap: 56px;
+  align-items: start;
+}
+@media (max-width: 940px) {
+  .shell { grid-template-columns: minmax(0,1fr); gap: 0; }
+}
+
+/* ---------- table of contents ---------- */
+.toc {
+  position: sticky;
+  top: 0;
+  padding: 36px 0;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+@media (max-width: 940px) {
+  .toc {
+    position: static; max-height: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 24px;
+  }
+}
+.toc h2 {
+  font-family: var(--mono);
+  font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--ink-faint); margin: 0 0 14px; font-weight: 600;
+}
+.toc ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1px; }
+.toc a {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--ink-soft);
+  font-size: 13.5px;
+  line-height: 1.45;
+  padding: 5px 8px 5px 6px;
+  border-radius: 4px;
+  border-left: 2px solid transparent;
+}
+.toc a span { font-family: var(--mono); font-size: 11.5px; color: var(--ink-faint); padding-top: 2px; font-variant-numeric: tabular-nums; }
+.toc a:hover { background: var(--surface-sub); color: var(--ink); }
+.toc a.is-active {
+  color: var(--ink); font-weight: 700;
+  border-left-color: var(--amber);
+  background: var(--surface-sub);
+}
+.toc a.is-active span { color: var(--amber); }
+.toc a:focus-visible { outline: 2px solid var(--steel); outline-offset: 1px; }
+
+/* ---------- article ---------- */
+article { padding: 36px 0 0; min-width: 0; }
+article > * { max-width: var(--measure); }
+article > figure, article > .scroller, article > .tablewrap { max-width: none; }
+
+h2 {
+  font-size: clamp(21px, 2.6vw, 27px);
+  letter-spacing: -.015em;
+  line-height: 1.28;
+  font-weight: 800;
+  margin: 72px 0 4px;
+  padding-top: 22px;
+  border-top: 1px solid var(--rule);
+  text-wrap: balance;
+  scroll-margin-top: 12px;
+}
+h2:first-of-type { margin-top: 8px; border-top: none; padding-top: 0; }
+h2 .num {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: .16em;
+  color: var(--amber);
+  font-weight: 600;
+  margin-bottom: 9px;
+}
+h3 {
+  font-size: 17.5px; font-weight: 700; letter-spacing: -.005em;
+  margin: 40px 0 2px; color: var(--ink);
+  scroll-margin-top: 12px;
+}
+h3 .num { font-family: var(--mono); font-size: 13px; color: var(--ink-faint); margin-right: 8px; font-weight: 500; }
+
+p { margin: 14px 0; }
+a { color: var(--steel); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--amber); }
+strong { font-weight: 700; }
+em { font-style: italic; color: var(--ink-soft); }
+
+code {
+  font-family: var(--mono);
+  font-size: .87em;
+  background: var(--surface-sub);
+  border: 1px solid var(--rule-soft);
+  border-radius: 3px;
+  padding: .08em .34em;
+  word-break: break-all;
+}
+pre {
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.6;
+  background: var(--mat);
+  color: #D6DEE8;
+  border-radius: 5px;
+  padding: 16px 18px;
+  overflow-x: auto;
+  margin: 20px 0;
+  border: 1px solid var(--rule);
+}
+pre code { background: none; border: 0; padding: 0; color: inherit; font-size: inherit; }
+
+ul, ol { margin: 14px 0; padding-left: 1.35em; }
+li { margin: 5px 0; }
+li > ul, li > ol { margin: 4px 0; }
+
+hr { display: none; }
+
+/* ---------- provenance callouts (structure = where a claim came from) ---------- */
+.note {
+  margin: 20px 0;
+  padding: 14px 18px;
+  border-left: 3px solid var(--rule);
+  background: var(--surface);
+  border-radius: 0 5px 5px 0;
+}
+.note > :first-child { margin-top: 0; }
+.note > :last-child { margin-bottom: 0; }
+.note__tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.note--memo { border-left-color: var(--steel); background: var(--steel-wash); }
+.note--memo .note__tag { color: var(--steel); }
+.note--add  { border-left-color: var(--amber); background: var(--amber-wash); }
+.note--add  .note__tag { color: var(--amber); }
+.note--fix  { border-left-color: var(--copper); background: var(--copper-wash); }
+.note--fix  .note__tag { color: var(--copper); }
+.note--ok   { border-left-color: var(--verdant); background: var(--verdant-wash); }
+.note--ok   .note__tag { color: var(--verdant); }
+
+blockquote {
+  margin: 22px 0;
+  padding: 2px 0 2px 20px;
+  border-left: 3px solid var(--amber);
+  color: var(--ink);
+  font-size: 17px;
+}
+blockquote p { margin: 8px 0; }
+
+/* ---------- formulas ---------- */
+.formula {
+  margin: 22px 0;
+  padding: 18px 20px;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  font-family: var(--mono);
+  font-size: 15px;
+  text-align: center;
+  overflow-x: auto;
+  box-shadow: var(--shadow);
+}
+.formula .frac { display: inline-flex; flex-direction: column; vertical-align: middle; margin: 0 .35em; }
+.formula .frac > span:first-child { border-bottom: 1px solid currentColor; padding: 0 .5em .15em; }
+.formula .frac > span:last-child { padding: .15em .5em 0; }
+.formula var { font-style: italic; }
+.formula .op { color: var(--ink-faint); margin: 0 .3em; }
+
+/* ---------- tables ---------- */
+.tablewrap { overflow-x: auto; margin: 22px 0; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); box-shadow: var(--shadow); }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--rule-soft); vertical-align: top; line-height: 1.55; }
+thead th {
+  background: var(--surface-sub);
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 600;
+  border-bottom: 1px solid var(--rule);
+  white-space: nowrap;
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: var(--surface-sub); }
+td:first-child { font-variant-numeric: tabular-nums; }
+
+/* ---------- slide captures on a permanent dark mat ---------- */
+figure {
+  margin: 26px 0;
+  background: var(--mat);
+  border: 1px solid var(--rule);
+  border-radius: 7px;
+  padding: 14px;
+  box-shadow: var(--shadow);
+}
+figure img { display: block; width: 100%; height: auto; border-radius: 3px; }
+figcaption {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  line-height: 1.5;
+  letter-spacing: .03em;
+  color: #8D9AA9;
+  margin-top: 11px;
+  display: flex; gap: 9px;
+}
+figcaption b { color: #C6D1DD; font-weight: 600; flex: none; }
+
+/* ---------- footer ---------- */
+footer {
+  border-top: 1px solid var(--rule);
+  margin-top: 72px; padding-top: 22px;
+  font-family: var(--mono);
+  font-size: 11.5px; letter-spacing: .04em;
+  color: var(--ink-faint);
+  max-width: var(--measure);
+}
+footer a { color: var(--ink-faint); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+</style>
+
+<header class="masthead">
+  <div class="masthead__in">
+    <p class="eyebrow">
+      <span>MLA Level 1</span><b>/</b><span>Lubrication &amp; Oil Analysis</span><b>/</b><span>강의 메모 정리본</span>
+    </p>
+    <h1>기계 윤활과 오일 분석 — MLA 1 학습 노트</h1>
+    <p class="dek">
+      YouTube MLA 1 교육을 들으며 받아쓴 메모를 22개 주제로 재구성하고, 강의가 스쳐 지나간 부분은
+      표준 번호·수치·근거를 찾아 보강했습니다. 슬라이드 캡처 24장은 해당 설명 옆에 배치했습니다.
+    </p>
+    <ul class="legend">
+      <li class="l-memo"><i>원 메모</i> — 강의 중 받아쓴 내용</li>
+      <li class="l-add"><i>보강</i> — 찾아서 덧붙인 내용</li>
+      <li class="l-fix"><i>정정</i> — 사실과 다른 부분을 바로잡음</li>
+    </ul>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="toc" aria-label="목차">
+    <h2>목차</h2>
+    <ol><!--NAV--></ol>
+  </nav>
+  <article><!--CONTENT--></article>
+</div>
+
+<script>
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll('.toc a'));
+  var heads = links.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); });
+  var active = -1;
+
+  function sync() {
+    var line = window.innerHeight * 0.3;
+    var found = 0;
+    for (var k = 0; k < heads.length; k++) {
+      if (heads[k] && heads[k].getBoundingClientRect().top <= line) found = k;
+    }
+    if (found === active) return;
+    if (active > -1) links[active].classList.remove('is-active');
+    links[found].classList.add('is-active');
+    var nav = links[found].closest('.toc');
+    if (nav && nav.scrollHeight > nav.clientHeight) {
+      var t = links[found].offsetTop - nav.clientHeight / 2;
+      if (Math.abs(nav.scrollTop - t) > 40) nav.scrollTop = t;
+    }
+    active = found;
+  }
+
+  var queued = false;
+  addEventListener('scroll', function () {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(function () { queued = false; sync(); });
+  }, { passive: true });
+  addEventListener('resize', sync);
+  addEventListener('load', sync);
+  sync();
+})();
+</script>

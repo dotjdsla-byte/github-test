@@ -266,8 +266,8 @@ ASTM D217 **혼화주도(worked penetration)** — 25°C에서 60회 혼화한 �
 ```
 Thickener
 ├─ Soap (비누계)
-│   ├─ Simple   : Ca, Li
-│   └─ Complex  : Al-X, Ca-X, Li-X      ← 복합 비누(complex): 산을 추가해 성능 향상
+│   ├─ Simple  : Ca, Li
+│   └─ Complex : Al-X, Ca-X, Li-X   ← 산을 추가해 성능을 끌어올린 복합 비누
 └─ Non-Soap (비비누계) : Clay(벤토나이트), Polyurea, 실리카
 ```
 
