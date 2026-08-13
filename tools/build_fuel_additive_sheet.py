@@ -39,7 +39,7 @@ ws.row_dimensions[1].height = 34
 
 ws.merge_cells("A2:F2")
 ws["A2"] = ("※ 고객 요청 양식 기준 재구성 · 제품 3종 (FuelPower Conditioner / FuelPower Catalyst / DieselPower Lubricity)\n"
-            "※ 제품별 적용 유종이 상이하여 열(column)을 「유종」이 아닌 「제품」 기준으로 배열하고, 유종 적용 범위는 별도 행 및 '유종별 적용' 시트에 표기")
+            "※ 제품별 적용 유종이 상이하여 열(column)을 「유종」이 아닌 「제품」 기준으로 배열하고, 유종 적용 범위는 '적용 유종' 행에 표기")
 ws["A2"].font = F(9, color="404040"); ws["A2"].alignment = WRAP
 ws.row_dimensions[2].height = 30
 
@@ -62,7 +62,7 @@ R.append(("적용 범위", "적용 유종",
           "HSFO / VLSFO /\nBio-VLSFO (B30) / Bio-HFO\n※ 잔사유 전용 (MGO 미적용)",
           "HSFO / VLSFO /\nBio-VLSFO (B30) / Bio-HFO\n※ 잔사유 전용 (MGO 미적용)",
           "LSMGO / MGO / MDO / ULSD\nBio-LSMGO (조건부)\n※ 증류유 전용",
-          "상세: '유종별 적용' 시트 참조", ""))
+          "Conditioner · Catalyst 는 잔사유,\nLubricity 는 증류유 전용", ""))
 R.append((None, "사용 목적",
           "아스팔텐 슬러지 분산 및 침전 억제\n연료 안정성 · 블렌드 호환성 확보\n(Stability & Dispersant)",
           "연소 효율 개선 (Combustion Improver)\n+ 경미한 슬러지 분산\n(Mild sludge dispersancy)",
@@ -86,7 +86,9 @@ R.append((None, "취급 · 주의사항", "-", "-",
           "DP Lubricity 제품 매뉴얼 기준", ""))
 
 R.append(("투입 비율\n(상세)", "투입기준 ①\n평상시 (General)",
-          "1L : 15 MT\n(1 : 15,000)", "1L : 15 MT\n(1 : 15,000)", "1L : 10 MT\n(0.1 L/ton, 100 ppm)", "", ""))
+          "1L : 15 MT\n(1 : 15,000)",
+          "1L : 10 MT\n(1 : 10,000, 100 ppm)",
+          "1L : 10 MT\n(0.1 L/ton, 100 ppm)", "", ""))
 R.append((None, "투입기준 ②\n최대 (Max.)",
           "1L : 5 MT\n(1 : 5,000)\n※ 고 TSP · 불안정 연료 · 블렌드 불호환 시",
           "1L : 4 MT\n(1 : 4,000)",
@@ -94,12 +96,12 @@ R.append((None, "투입기준 ②\n최대 (Max.)",
 R.append((None, "투입기준 ③\n최소 (Min.)",
           "1L : 25 MT\n(1 : 25,000)", "1L : 15 MT\n(1 : 15,000)", "1L : 10 MT\n(0.1 L/ton)", "", ""))
 R.append((None, "실측 시험 근거 투입량",
-          "Hot Spin 시험 기준\n(제품 자료상 1 : 10,000 적용 사례 있음)",
-          "100 ppm = 1L : 10 MT\n★ SFOC 개선 실측 데이터는 전부\n100 ppm 조건에서 취득",
-          "125 ppm = 0.125 L/ton\n→ HFRR 460 µm 미만 달성",
-          "★ 연료절감을 목적으로 할 경우\nCatalyst는 1L : 10 MT 적용 권장", ""))
+          "Hot Spin 시험 기준\n(Catalyst 병용 실선 시험은\n1L : 10 MT 조건)",
+          "100 ppm = 1L : 10 MT\n→ SFOC 개선 실측 데이터\n   전부 이 조건에서 취득",
+          "100 ppm = 1L : 10 MT\n→ HFRR 396 µm 달성",
+          "3개 제품 모두 100 ppm(1L : 10 MT)\n기준으로 정리 (Conditioner 는\n제품 사양상 General 1L : 15 MT)", ""))
 
-R.append(("투입량 · 비용", "평상시 기준 처리량\n(1 L 당 처리 톤수, MT)", 15, 15, 10,
+R.append(("투입량 · 비용", "평상시 기준 처리량\n(1 L 당 처리 톤수, MT)", 15, 10, 10,
           "아래 계산식의 입력값 (파란색)", "num"))
 R.append((None, "1,000 M/T 기준 투입량 (L)", None, None, None, "1,000 ÷ 처리톤수 (자동 계산)", "qty"))
 R.append((None, "제품단가 (USD / LITER)", None, None, None, "★ 노란색 셀에 단가 입력", "price"))
@@ -111,14 +113,14 @@ R.append((None, "보급가능지역 - 국외", "가능\n(WSS 글로벌 네트워
           "구체적 공급 가능 항구 목록 별첨 필요", ""))
 
 R.append(("기대 효과", "연료절감\n[보증 여부]",
-          "단독 기준 연료절감률 미제시\n(보증 불가)\n※ Catalyst 병용 시 SFOC 최대 1.31% 개선\n  (CCS 입회 실선 엔진 시험)",
-          "VLSFO : SFOC 1.454% 개선\nBio-VLSFO (B30) : SFOC 최대 1.31% 개선\n[보증 불가 — 실측 시험 자료 기준]",
+          "단독 기준 연료절감률 미제시\n※ Catalyst 병용 시 SFOC 최대 1.31% 개선\n  (Bio-VLSFO B30, CCS 입회 실선 엔진 시험)\n[보증 불가]",
+          "약 1.5%\n(VLSFO, 100 ppm 조건 실측 1.454%)\nBio-VLSFO (B30) : 최대 1.31%\n[보증 불가 — 실측 시험 자료 기준]",
           "해당 없음\n(윤활성 개선 제품)",
           "실측 시험 자료는 'Reference 상세' 시트 참조", ""))
 R.append((None, "기타 효과",
           "Hot Spin 침전 평균 35.5% 감소\n(8개 항구 RMG380 실측, 최고 46.67%)\n정유기 · 필터 막힘 저감\n블렌드 간 호환성 개선",
           "ECN (점화성 지수) 6.25% 개선\nIgnition Delay 4.92% 단축\n(IP 541 / FIA-100 FCA, VPS)",
-          "HFRR 마모흔 535 µm (ULSD 단독, 부적합)\n→ 100 ppm 396 µm / 150 ppm 355 µm\nISO 8217 (520) · EN 590 (460) 모두 충족",
+          "HFRR 마모흔 535 µm (ULSD 단독, 부적합)\n→ 100 ppm 투입 시 396 µm (합격)\nISO 8217 (520) · EN 590 (460) 모두 충족",
           "", ""))
 
 R.append(("검증 · 실적", "제3자 검증 /\n선급 · 시험기관",
@@ -217,8 +219,9 @@ n = ws.cell(note, 1,
     "  · 노란색 셀 = 기입 필요 항목 (제품단가 / 포장 규격 / 판매실적 / 담당자 연락처 / 제품번호 · 성상 일부)\n"
     "  · 파란색 숫자 = 계산 입력값. '평상시 기준 처리량'을 바꾸면 투입량과 예상 비용이 자동으로 재계산됩니다.\n"
     "  · 예상 비용 = 1,000 M/T 기준 투입량 × 제품단가. 단가 입력 전에는 공란으로 표시됩니다.\n"
-    "  · ★ Catalyst의 SFOC 개선 실측치(1.454% / 1.31%)는 100 ppm(1L : 10 MT) 조건에서 취득한 값입니다. "
-    "평상시 권장 투입비율(1L : 15 MT)과 다르므로, 연료절감을 제안 근거로 사용할 경우 투입량을 1L : 10 MT(1,000 M/T 당 100 L)로 산정해야 합니다.\n"
+    "  · ★ Catalyst 연료절감 「약 1.5%」는 VLSFO 실측치 1.454%(100 ppm = 1L : 10 MT 조건)를 반올림한 값입니다. "
+    "본 표의 Catalyst 투입기준도 동일하게 100 ppm(1,000 M/T 당 100 L)으로 산정했습니다. "
+    "Bio-VLSFO(B30)의 실측치는 최대 1.31%로 별개이며, 1.5%는 VLSFO 조건에 한합니다.\n"
     "  · 본 자료의 모든 수치는 제3자 시험기관 · 선급 실측 자료에 근거하며, 연료절감률에 대한 보증은 제공되지 않습니다.")
 n.font = F(9, color="404040"); n.alignment = WRAP
 n.fill = PatternFill("solid", fgColor="FFF9E6"); n.border = BOX
@@ -234,57 +237,7 @@ for rr in range(HDR + 1, last_row + 1):
 ws.freeze_panes = "C5"
 
 # =====================================================================
-# SHEET 2 - 유종별 적용
-# =====================================================================
-ws2 = wb.create_sheet("유종별 적용")
-ws2.merge_cells("A1:H1")
-ws2["A1"] = "제품별 · 유종별 적용 범위"
-ws2["A1"].font = F(14, True, "FFFFFF"); ws2["A1"].fill = NAVY; ws2["A1"].alignment = CTR
-ws2.row_dimensions[1].height = 30
-ws2.merge_cells("A2:H2")
-ws2["A2"] = "● 권장 (Recommended)    △ 조건부 적용 (Case by case)    –  해당 없음 (N/A)"
-ws2["A2"].font = F(9, color="404040"); ws2["A2"].alignment = CTR
-
-fuels = ["HSFO", "VLSFO", "Bio-VLSFO\n/ Bio-HFO\n(B30)", "LSMGO / MGO\n/ MDO", "Bio-LSMGO\n/ Bio-MDO", "B100", "기타 용도\n(Tank Mixing 등)"]
-for i, h in enumerate(["제품명"] + fuels, start=1):
-    c = ws2.cell(4, i, h)
-    c.font = F(10, True, "FFFFFF"); c.fill = HEADF; c.alignment = CTR; c.border = BOX
-ws2.row_dimensions[4].height = 42
-
-MTX = [
-    ("Unitor™ FuelPower™ Conditioner", ["●", "●", "●", "–", "–", "–", "●"]),
-    ("Unitor™ FuelPower™ Catalyst",    ["●", "●", "●", "–", "–", "–", "–"]),
-    ("Unitor™ DieselPower™ Lubricity", ["–", "–", "–", "●", "△", "△", "–"]),
-]
-rr = 5
-for name, marks in MTX:
-    c = ws2.cell(rr, 1, name); c.font = F(10, True); c.alignment = WRAP; c.border = BOX
-    for i, m in enumerate(marks, start=2):
-        mc = ws2.cell(rr, i, m)
-        mc.alignment = CTR; mc.border = BOX
-        mc.font = F(13, True, "1F3864" if m == "●" else ("BF8F00" if m == "△" else "A6A6A6"))
-    ws2.row_dimensions[rr].height = 30
-    rr += 1
-
-rr += 1
-ws2.merge_cells(start_row=rr, start_column=1, end_row=rr, end_column=8)
-c = ws2.cell(rr, 1,
-    "▣ 적용 근거 및 단서\n"
-    "  · FuelPower Conditioner / Catalyst : 잔사유(Residual) 전용 제품으로 MGO 등 증류유에는 적용하지 않습니다.\n"
-    "  · 기타 용도(Tank Mixing) : 서로 다른 벙커 간 혼합 시 발생하는 불호환(Incompatibility) 완화 목적의 Conditioner 적용을 의미합니다.\n"
-    "  · DieselPower Lubricity — Bio-LSMGO : FAME 성분 자체가 윤활성을 보완하므로 윤활성 부적합 가능성이 낮습니다. 성적서상 HFRR 값 확인 후 적용을 판단합니다.\n"
-    "  · DieselPower Lubricity — B100 : HVO(수소첨가 식물성 오일)에 한해 윤활성 저하가 나타납니다. 일반 FAME B100은 해당하지 않습니다.\n"
-    "  · 본 표는 3개 제품에 한정된 것으로, 미생물 · 저온유동성 · 산화안정성 · Ash · Soot 등 그 밖의 이슈에 대해서는 별도 제품군이 적용됩니다.")
-c.font = F(9, color="404040"); c.alignment = WRAP
-c.fill = PatternFill("solid", fgColor="FFF9E6"); c.border = BOX
-ws2.row_dimensions[rr].height = 96
-
-ws2.column_dimensions["A"].width = 38
-for i in range(2, 9):
-    ws2.column_dimensions[get_column_letter(i)].width = 16
-
-# =====================================================================
-# SHEET 3 - Reference 상세
+# SHEET 2 - Reference 상세
 # =====================================================================
 ws3 = wb.create_sheet("Reference 상세")
 ws3.merge_cells("A1:H1")
@@ -323,7 +276,7 @@ REFS = [
      "SFOC 최대 1.31% 개선\n(Engine Trial)", "Actual Trial\n(실측 시험)", "CCS 검증 완료"),
     (5, "Unitor™ DieselPower™ Lubricity", "LSMGO / ULSD",
      "Lloyd's Register\nProduct Verification Scheme\nISO 12156-1 (HFRR)", "-",
-     "HFRR 마모흔 (WS1.4, µm)\n· ULSD 단독 : 535 (부적합)\n· + 100 ppm : 396 (합격)\n· + 150 ppm : 355 (합격)",
+     "HFRR 마모흔 (WS1.4, µm)\n· ULSD 단독 : 535 (부적합)\n· + 100 ppm (1L : 10 MT) : 396 (합격)",
      "Lab Test\n(사내 시험)", "ISO 8217 한계 520 µm,\nEN 590 한계 460 µm 모두 충족"),
 ]
 rr = 5
@@ -420,7 +373,7 @@ for i, w in enumerate(widths3, start=1):
     ws3.column_dimensions[get_column_letter(i)].width = w
 
 # =====================================================================
-# SHEET 4 - 투입량·비용 산출
+# SHEET 3 - 투입량·비용 산출
 # =====================================================================
 ws4 = wb.create_sheet("투입량·비용 산출")
 ws4.merge_cells("A1:G1")
@@ -450,11 +403,10 @@ CALC = [
     ("Unitor™ FuelPower™ Conditioner", "HSFO / VLSFO /\nBio-VLSFO", "평상시 (General)", 15),
     ("", "", "최대 (Max.)", 5),
     ("", "", "최소 (Min.)", 25),
-    ("Unitor™ FuelPower™ Catalyst", "HSFO / VLSFO /\nBio-VLSFO", "평상시 (General)", 15),
-    ("", "", "★ 연료절감 실측 조건 (100 ppm)", 10),
+    ("Unitor™ FuelPower™ Catalyst", "HSFO / VLSFO /\nBio-VLSFO", "★ 평상시 · 연료절감 실측 조건 (100 ppm)", 10),
+    ("", "", "제품 사양상 General", 15),
     ("", "", "최대 (Max.)", 4),
-    ("Unitor™ DieselPower™ Lubricity", "LSMGO / MGO /\nMDO", "평상시 (General, 100 ppm)", 10),
-    ("", "", "시험 근거 (125 ppm)", 8),
+    ("Unitor™ DieselPower™ Lubricity", "LSMGO / MGO /\nMDO", "★ 평상시 (100 ppm) — HFRR 396 µm", 10),
     ("", "", "최대 (Max., 200 ppm)", 5),
 ]
 rr = 7
@@ -495,8 +447,8 @@ c = ws4.cell(rr, 1,
     "▣ 산출 기준\n"
     "  · 필요 투입량 (L) = 벙커량 (M/T) ÷ 투입 비율 (1 L 당 처리 MT), 리터 단위 반올림\n"
     "  · 예상 비용 (USD) = 필요 투입량 × 제품단가. 단가 입력 전에는 공란으로 표시됩니다.\n"
-    "  · ★ FuelPower Catalyst 의 SFOC 개선 실측치(VLSFO 1.454% / Bio-VLSFO 1.31%)는 100 ppm(1L : 10 MT) 조건에서 취득한 값입니다. "
-    "연료절감을 근거로 제안할 경우 이 행을 기준으로 산출하십시오.\n"
+    "  · ★ 표시 행이 제안 기준입니다. FuelPower Catalyst 의 연료절감 「약 1.5%」(VLSFO 실측 1.454%)와 "
+    "DieselPower Lubricity 의 HFRR 396 µm 는 모두 100 ppm(1L : 10 MT) 조건에서 취득한 값이므로, 이 행을 기준으로 산출하십시오.\n"
     "  · Conditioner 와 Catalyst 를 병용할 경우 두 제품의 투입량과 비용을 각각 합산해야 합니다. "
     "(Bio-VLSFO B30 실선 시험은 Catalyst 1L + Conditioner 1L per 10 MT 조건에서 수행되었습니다.)")
 c.font = F(9, color="404040"); c.alignment = WRAP
