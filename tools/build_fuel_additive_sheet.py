@@ -101,9 +101,9 @@ R.append((None, "실측 시험 근거 투입량",
 
 R.append(("투입량 · 비용", "평상시 기준 처리량\n(1 L 당 처리 톤수, MT)", 15, 15, 10,
           "아래 계산식의 입력값 (파란색)", "num"))
-R.append((None, "1,000 M/T 기준 투입량 (L)", None, None, None, "= ROUND(1000 / 처리톤수, 0)", "qty"))
+R.append((None, "1,000 M/T 기준 투입량 (L)", None, None, None, "1,000 ÷ 처리톤수 (자동 계산)", "qty"))
 R.append((None, "제품단가 (USD / LITER)", None, None, None, "★ 노란색 셀에 단가 입력", "price"))
-R.append((None, "1,000 M/T 기준 예상 비용 (USD)", None, None, None, "= 투입량 × 단가 (자동 계산)", "cost"))
+R.append((None, "1,000 M/T 기준 예상 비용 (USD)", None, None, None, "투입량 × 단가 (자동 계산)", "cost"))
 
 R.append(("공급 조건", "포장 규격", "확인 필요", "확인 필요", "확인 필요", "표준 CAN / DRUM 규격 확인 후 기입", "input"))
 R.append((None, "보급가능지역 - 국내", "가능", "가능", "가능", "", ""))
