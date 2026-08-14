@@ -1,4 +1,4 @@
-"""Build the EAL product / maker summary workbook from five SK Shipping lube charts.
+"""Build the EAL product / maker summary workbook from six SK Shipping lube charts.
 
 Source PDFs (all vessels operated by SK Shipping):
   PUTERI SABAH   IMO 9975521  Shell            Lubrication Survey v2, 15.01.2025
@@ -6,6 +6,7 @@ Source PDFs (all vessels operated by SK Shipping):
   BU FINTAS      IMO 9976824  TotalEnergies    Lubrication Chart R2, 07-Aug-2024
   MARVEL DOVE    IMO 9964182  Chevron          Lubrication Chart, rev. 17-Jun-2024
   PRISM AGILITY  IMO 9810549  TotalEnergies    Lubrication Chart R3, 11-Jan-2024
+  SK AUDACE      IMO 9693161  TotalEnergies    Lubrication Chart R3, 11-Jan-2024
 
 Every row below is transcribed from those charts; nothing is inferred.
 """
@@ -171,24 +172,93 @@ DETAIL = [
      "Rudder Carrier", "Grease Points", "HOUTON TECTYL G OS 5550 ECO",
      "Houghton (Tectyl)", "3K INDUSTRY", "MSB-360-T6M", "COMMENTS Note 3",
      "★ 차트 표에는 'Maker supply' 로만 기재. 차트 원문 표기 'HOUTON' (Houghton 오기로 추정)"),
+
+    # ---- SK AUDACE (TotalEnergies) : "(EAL)" 표기
+    ("SK AUDACE", "9693161", "TotalEnergies\nLubmarine", "R3 / 2024-01-11",
+     "Stern Tube", "Bearings & Seals", "BIONEPTAN 150",
+     "TotalEnergies", "WARTSILA", "", "(EAL)",
+     "★ 본 6척 중 유일하게 Stern Tube 에 EAL 적용 (타 5척은 광유)"),
+    ("SK AUDACE", "9693161", "TotalEnergies\nLubmarine", "R3 / 2024-01-11",
+     "Bow Thruster", "Enclosed Gears", "BIONEPTAN HT 100",
+     "TotalEnergies", "KHI", "", "(EAL)", ""),
+    ("SK AUDACE", "9693161", "TotalEnergies\nLubmarine", "R3 / 2024-01-11",
+     "Windlass & Mooring Winch", "Grease Points", "BIOMULTIS EP 2",
+     "TotalEnergies", "FLUTEK", "", "(EAL)", ""),
+    ("SK AUDACE", "9693161", "TotalEnergies\nLubmarine", "R3 / 2024-01-11",
+     "Cargo Machinery Room Crane", "Grease Points", "BIOMULTIS EP 2",
+     "TotalEnergies", "ORIENTAL", "", "(EAL)", ""),
+    ("SK AUDACE", "9693161", "TotalEnergies\nLubmarine", "R3 / 2024-01-11",
+     "Hose Handling Crane", "Grease Points", "BIOMULTIS EP 2",
+     "TotalEnergies", "ORIENTAL", "", "(EAL)", ""),
+    ("SK AUDACE", "9693161", "TotalEnergies\nLubmarine", "R3 / 2024-01-11",
+     "Provision Crane", "Grease Points", "BIOMULTIS EP 2",
+     "TotalEnergies", "ORIENTAL", "", "(EAL)", ""),
+    ("SK AUDACE", "9693161", "TotalEnergies\nLubmarine", "R3 / 2024-01-11",
+     "Emergency Towing System", "Grease Points", "BIOMULTIS EP 2",
+     "TotalEnergies", "TANKTECH", "", "(EAL)", ""),
+    ("SK AUDACE", "9693161", "TotalEnergies\nLubmarine", "R3 / 2024-01-11",
+     "Rescue Boat Davit Winch", "Grease Points", "BIOMULTIS EP 2",
+     "TotalEnergies", "ORIENTAL", "", "(EAL)", ""),
+    ("SK AUDACE", "9693161", "TotalEnergies\nLubmarine", "R3 / 2024-01-11",
+     "Lifeboat Davit Winch", "Grease Points", "BIOMULTIS EP 2",
+     "TotalEnergies", "ORIENTAL", "", "(EAL)", ""),
+    ("SK AUDACE", "9693161", "TotalEnergies\nLubmarine", "R3 / 2024-01-11",
+     "General Lubrication", "Grease Points", "BIOMULTIS EP 2",
+     "TotalEnergies", "(전선 공통)", "", "(EAL)", ""),
+    ("SK AUDACE", "9693161", "TotalEnergies\nLubmarine", "R3 / 2024-01-11",
+     "Cargo Machinery Room Crane", "Wire Ropes", "BIOADHESIVE PLUS",
+     "TotalEnergies", "ORIENTAL", "", "(EAL)", ""),
+    ("SK AUDACE", "9693161", "TotalEnergies\nLubmarine", "R3 / 2024-01-11",
+     "Hose Handling Crane", "Wire Ropes", "BIOADHESIVE PLUS",
+     "TotalEnergies", "ORIENTAL", "", "(EAL)", ""),
+    ("SK AUDACE", "9693161", "TotalEnergies\nLubmarine", "R3 / 2024-01-11",
+     "Provision Crane", "Wire Ropes", "BIOADHESIVE PLUS",
+     "TotalEnergies", "ORIENTAL", "", "(EAL)", ""),
+    ("SK AUDACE", "9693161", "TotalEnergies\nLubmarine", "R3 / 2024-01-11",
+     "Rescue Boat Davit Winch", "Wire Ropes", "BIOADHESIVE PLUS",
+     "TotalEnergies", "ORIENTAL", "", "(EAL)", ""),
+    ("SK AUDACE", "9693161", "TotalEnergies\nLubmarine", "R3 / 2024-01-11",
+     "Lifeboat Davit Winch", "Wire Ropes", "BIOADHESIVE PLUS",
+     "TotalEnergies", "ORIENTAL", "", "(EAL)", ""),
+    ("SK AUDACE", "9693161", "TotalEnergies\nLubmarine", "R3 / 2024-01-11",
+     "General Lubrication", "Wire Ropes", "BIOADHESIVE PLUS",
+     "TotalEnergies", "(전선 공통)", "", "(EAL)", ""),
+    ("SK AUDACE", "9693161", "TotalEnergies\nLubmarine", "R3 / 2024-01-11",
+     "Rudder Carrier", "Grease Pump", "MOBIL SHC AWARE GREASE EP 2",
+     "ExxonMobil", "FLUTEK", "", "COMMENTS Note 3",
+     "★ 차트 표에는 'Maker supply' 로만 기재. SHC AWARE 는 ExxonMobil 의 EAL 제품군"),
+    ("SK AUDACE", "9693161", "TotalEnergies\nLubmarine", "R3 / 2024-01-11",
+     "Packaged Type Unit Cooler — ECR", "Crankcase (Synthetic)", "MOBIL ARCTIC EAL 32",
+     "ExxonMobil", "HI-AIR KOREA", "", "COMMENTS Note 1",
+     "★ 냉동기 압축기용 POE 오일. 제품명의 EAL 은 상표이며 VGP 환경친화 윤활유 아님"),
+    ("SK AUDACE", "9693161", "TotalEnergies\nLubmarine", "R3 / 2024-01-11",
+     "Packaged Type Unit Cooler — MSBD Room", "Crankcase (Synthetic)", "MOBIL ARCTIC EAL 32",
+     "ExxonMobil", "HI-AIR KOREA", "", "COMMENTS Note 1", "★ 상동"),
+    ("SK AUDACE", "9693161", "TotalEnergies\nLubmarine", "R3 / 2024-01-11",
+     "Packaged Type Unit Cooler — Workshop", "Crankcase (Synthetic)", "MOBIL ARCTIC EAL 32",
+     "ExxonMobil", "HI-AIR KOREA", "", "COMMENTS Note 1", "★ 상동"),
 ]
 
 # 제품별 요약 ----------------------------------------------------------
 # (제품명, 오일메이커, 제품유형, 적용선박, 주요 적용부위, 표기, 비고)
 PRODUCTS = [
     ("BIOMULTIS EP 2", "TotalEnergies\nLubmarine", "생분해성 다목적 EP 그리스",
-     "AL SAKHAMAH\nBU FINTAS\nPRISM AGILITY",
-     "Propeller Cap · Rudder Carrier ·\nSteering Gear Grease Pump ·\nBow Thruster Grease Points ·\nHi-FIN Inside · General Greasing",
-     "(EAL)", "3개 선박 · 총 7개 부위. 본 5척 중 최다 적용 EAL 제품"),
+     "AL SAKHAMAH\nBU FINTAS\nPRISM AGILITY\nSK AUDACE",
+     "Propeller Cap · Rudder Carrier ·\nSteering Gear Grease Pump ·\nBow Thruster · Hi-FIN Inside ·\nWinch · Crane · Davit ·\nEmergency Towing · General Greasing",
+     "(EAL)", "4개 선박 · 총 15개 부위. 본 6척 중 최다 적용 EAL 제품"),
     ("BIOADHESIVE PLUS", "TotalEnergies\nLubmarine", "생분해성 점착성 와이어로프 그리스",
-     "AL SAKHAMAH\nBU FINTAS",
-     "Emergency Towing System\n(Towing Pennant / Wire Ropes) ·\nRudder Trunk · General Greasing",
-     "(EAL)", "2개 선박 · 총 4개 부위"),
+     "AL SAKHAMAH\nBU FINTAS\nSK AUDACE",
+     "Emergency Towing System\n(Towing Pennant / Wire Ropes) ·\nRudder Trunk · Crane · Davit Winch ·\nGeneral Greasing",
+     "(EAL)", "3개 선박 · 총 10개 부위"),
     ("BIO OG+", "TotalEnergies\nLubmarine", "생분해성 개방기어용 그리스",
      "BU FINTAS", "General Greasing — Open Gears", "(EAL)", "1개 선박 · 1개 부위"),
     ("BIONEPTAN HT 100", "TotalEnergies\nLubmarine", "생분해성 밀폐기어유 (ISO VG 100)",
-     "PRISM AGILITY", "Bow Thruster — Enclosed Gears", "(EAL)",
-     "1개 선박 · 1개 부위. 본 목록 중 유일한 기어유(오일) EAL"),
+     "PRISM AGILITY\nSK AUDACE", "Bow Thruster — Enclosed Gears", "(EAL)",
+     "2개 선박 · 총 2개 부위"),
+    ("BIONEPTAN 150", "TotalEnergies\nLubmarine", "생분해성 선미관유 (ISO VG 150)",
+     "SK AUDACE", "Stern Tube — Bearings & Seals", "(EAL)",
+     "★ 본 6척 중 유일한 Stern Tube EAL 적용. 나머지 5척은 광유\n"
+     "(Melina S 30 / Atlanta Marine D 3005 / Veritas 800 Marine 30)"),
     ("Shell Naturelle S2 Grease\nA600P 1.5", "Shell", "생분해성 와이어로프 그리스",
      "PUTERI SABAH",
      "Accommodation / Pilot Ladder ·\nTowing Wire · Crane Open Gears &\nWire Ropes · Lifeboat Davit ·\nGeneral Lubrication",
@@ -206,6 +276,9 @@ PRODUCTS = [
     ("MOBIL SHC AWARE GEAR 100", "ExxonMobil", "합성 생분해성 기어유 (ISO VG 100)",
      "PRISM AGILITY", "Bow Thruster 초기 충전유", "COMMENTS Note 1",
      "★ 차트 본문 표에는 (EAL) 미표기 — COMMENTS 주석에만 기재"),
+    ("MOBIL SHC AWARE GREASE EP 2", "ExxonMobil", "합성 생분해성 EP 그리스",
+     "SK AUDACE", "Rudder Carrier — Grease Pump", "COMMENTS Note 3",
+     "★ 차트 본문 표에는 'Maker supply' 로만 기재 — COMMENTS 주석에만 제품명 명시"),
     ("HOUTON TECTYL G OS 5550 ECO", "Houghton (Tectyl)", "환경친화 러더캐리어 그리스",
      "PRISM AGILITY", "Rudder Carrier — Grease Points", "COMMENTS Note 3",
      "★ 차트 본문 표에는 'Maker supply' 로만 기재 — COMMENTS 주석에만 제품명 명시"),
@@ -213,7 +286,7 @@ PRODUCTS = [
      "PUTERI SABAH", "Rudder Carrier — Grease Filling", "(VGP Compliant)",
      "★ 차트 주석 (B) = Shell Marine 미공급 품목. 제조사 확인 필요"),
     ("MOBIL Arctic EAL 32", "ExxonMobil", "냉동기 압축기유 (POE)",
-     "MARVEL DOVE\nBU FINTAS", "Unit Cooler Crankcase (3개소) ·\nBU FINTAS 초기 충전유",
+     "MARVEL DOVE\nBU FINTAS\nSK AUDACE", "Unit Cooler Crankcase\n(MARVEL DOVE 3개소 · SK AUDACE 3개소) ·\nBU FINTAS 초기 충전유",
      "제품명에 EAL 포함",
      "★ 제품명의 'EAL' 은 상표이며 VGP 환경친화 윤활유(EAL) 아님. "
      "밀폐 냉동회로용으로 해수 접촉부가 아님 — EAL 목록 집계 시 제외 검토 필요"),
@@ -228,12 +301,12 @@ ws = wb.active
 ws.title = "EAL 제품·메이커"
 
 ws.merge_cells("A1:G1")
-ws["A1"] = "선박 5척 Lubrication Chart — EAL(환경친화 윤활유) 제품 · 메이커 종합"
+ws["A1"] = "선박 6척 Lubrication Chart — EAL(환경친화 윤활유) 제품 · 메이커 종합"
 ws["A1"].font = F(15, True, "FFFFFF"); ws["A1"].fill = NAVY; ws["A1"].alignment = CTR
 ws.row_dimensions[1].height = 32
 
 ws.merge_cells("A2:G2")
-ws["A2"] = ("※ 대상 : PUTERI SABAH · AL SAKHAMAH · BU FINTAS · MARVEL DOVE · PRISM AGILITY (SK SHIPPING)\n"
+ws["A2"] = ("※ 대상 : PUTERI SABAH · AL SAKHAMAH · BU FINTAS · MARVEL DOVE · PRISM AGILITY · SK AUDACE (SK SHIPPING)\n"
             "※ TotalEnergies 차트는 「(EAL)」, Shell · Chevron 차트는 「(VGP Compliant)」로 표기 — 표기만 다를 뿐 동일한 환경친화 윤활유 지정입니다.")
 ws["A2"].font = F(9, color="404040"); ws["A2"].alignment = WRAP
 ws.row_dimensions[2].height = 30
@@ -347,7 +420,7 @@ c = ws2.cell(r, 1,
     "  · AL SAKHAMAH — TotalEnergies Lubmarine Lubrication Chart R3, 2025-04-16 (NAVITEC No. 32788)\n"
     "  · BU FINTAS — TotalEnergies Lubmarine Lubrication Chart R2, 2024-08-07 (NAVITEC No. 32574)\n"
     "  · MARVEL DOVE — Chevron Marine Lubricants Lubrication Chart, 최종 개정 2024-06-17 (Provisional)\n"
-    "  · PRISM AGILITY — TotalEnergies Lubmarine Lubrication Chart R3, 2024-01-11 (NAVITEC No. 24221)\n"
+    "  · PRISM AGILITY — TotalEnergies Lubmarine Lubrication Chart R3, 2024-01-11 (NAVITEC No. 24221)\n  · SK AUDACE — TotalEnergies Lubmarine Lubrication Chart R3, 2024-01-11 (NAVITEC No. 22000)\n"
     "  · 분홍색 행 = 표기 방식이 달라 별도 판단이 필요한 항목 (제품명에 EAL 포함 / COMMENTS 주석 기재 / 요약표 분류)")
 c.font = F(9, color="404040"); c.alignment = WRAP
 c.fill = PatternFill("solid", fgColor="FFF9E6"); c.border = BOX
@@ -357,6 +430,6 @@ for col, w in zip("ABCDEFGHIJK", [15, 11, 15, 14, 26, 22, 27, 15, 28, 20, 40]):
     ws2.column_dimensions[col].width = w
 ws2.freeze_panes = "E5"
 
-out = "/home/user/github-test/EAL_제품_메이커_정리_5척.xlsx"
+out = "/home/user/github-test/EAL_제품_메이커_정리_6척.xlsx"
 wb.save(out)
 print("saved", out, "| products:", len(PRODUCTS), "| detail rows:", len(DETAIL))
