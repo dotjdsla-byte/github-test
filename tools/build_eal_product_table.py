@@ -292,6 +292,106 @@ PRODUCTS = [
      "밀폐 냉동회로용으로 해수 접촉부가 아님 — EAL 목록 집계 시 제외 검토 필요"),
 ]
 
+
+# Wilhelmsen 공급 Klüber 품목 매칭 --------------------------------------
+# PRODUCTS 순서와 1:1 대응. (대응 품목 텍스트, 상태)
+#   상태: 'ok'  = 용도·점도·장비메이커 승인까지 확인된 대응
+#         'chk' = 대응 품목은 있으나 별도 확인 필요
+#         'na'  = Wilhelmsen 공급 Klüber BIO 품목 중 직접 대응 없음
+KLU_ITEMS = [
+    # 0 BIOMULTIS EP 2 — 용도가 갈리므로 부위별로 나눠 매칭
+    ("● Propeller Cap 용\n"
+     "   210016  KLÜBERBIO BM 32-142 25 KG\n"
+     "● Rudder Carrier / Shaft·Pump 용\n"
+     "   210028  KLÜBERBIO LG 39-701 N 18 KG\n"
+     "   210072  KLÜBERBIO LG 39-701 N 180 KG\n"
+     "● 일반 Grease Point · 씰 용\n"
+     "   210077  KLÜBERBIO AG 39-602 N 25 KG\n"
+     "   210078  KLÜBERBIO AG 39-602 N 180 KG", "ok"),
+
+    # 1 BIOADHESIVE PLUS — 와이어로프 점착 그리스
+    ("직접 대응 품목 미확인\n"
+     "후보 (용도 확인 필요)\n"
+     "   210068  KLÜBERBIO AM 92-142 25 KG\n"
+     "   210021  KLÜBERBIO AM 92-142 180 KG", "chk"),
+
+    # 2 BIO OG+ — 개방기어
+    ("직접 대응 품목 미확인\n"
+     "후보 (용도 확인 필요)\n"
+     "   210098  KLÜBERBIO GE 32-681 25 KG\n"
+     "   210094  KLÜBERBIO GE 32-681 180 KG\n"
+     "※ 210060 GRAFLOSCON C-SG 0 ULTRA 는\n"
+     "   개방기어용이나 BIO 계열 아님", "chk"),
+
+    # 3 BIONEPTAN HT 100 — Bow Thruster 기어유 VG 100
+    ("210004  KLÜBERBIO EG 2-100 200 LTR\n"
+     "→ 동일 점도(VG 100) 스러스터 기어유\n"
+     "→ KHI 승인 · SKF EAL 리스트 등재", "ok"),
+
+    # 4 BIONEPTAN 150 — Stern Tube VG 150
+    ("210056  KLÜBERBIO RM 2-150 200 LTR\n"
+     "→ 동일 점도(VG 150) 선미관유\n"
+     "→ Wärtsilä 승인 · SKF EAL 리스트 등재\n"
+     "※ VG 100 필요 시 210012 RM 2-100", "ok"),
+
+    # 5 Shell Naturelle S2 Grease A600P 1.5 — 와이어로프
+    ("직접 대응 품목 미확인\n"
+     "후보 (용도 확인 필요)\n"
+     "   210068  KLÜBERBIO AM 92-142 25 KG\n"
+     "   210021  KLÜBERBIO AM 92-142 180 KG", "chk"),
+
+    # 6 Shell Naturelle S5 Grease V120P 2 — Propeller Bonnet/Cap
+    ("210016  KLÜBERBIO BM 32-142 25 KG\n"
+     "→ Propeller Cap 용 (MAN D&T · MMG 승인)\n"
+     "일반 Grease Point 겸용 시\n"
+     "   210077  KLÜBERBIO AG 39-602 N 25 KG\n"
+     "   210078  KLÜBERBIO AG 39-602 N 180 KG", "ok"),
+
+    # 7 CLARITY SYN EA GREASE — Propeller Bonnet + Wire Ropes + Open Gears
+    ("● Propeller Bonnet 용\n"
+     "   210016  KLÜBERBIO BM 32-142 25 KG\n"
+     "● Wire Ropes · Open Gears 용\n"
+     "   직접 대응 품목 미확인\n"
+     "   후보 210068 / 210021 AM 92-142\n"
+     "        210098 / 210094 GE 32-681", "chk"),
+
+    # 8 CLARITY SYN EA GREASE 0 — Rudder Carrier (3K)
+    ("210028  KLÜBERBIO LG 39-701 N 18 KG\n"
+     "210072  KLÜBERBIO LG 39-701 N 180 KG\n"
+     "→ 3K / Korea rudder shaft & pump 승인\n"
+     "※ 현재품 0번 주도 — 주도 등급 확인 필요", "ok"),
+
+    # 9 MOBIL SHC AWARE GEAR 100 — Bow Thruster 기어유 VG 100
+    ("210004  KLÜBERBIO EG 2-100 200 LTR\n"
+     "→ 동일 점도(VG 100) 스러스터 기어유\n"
+     "→ KHI 승인 · SKF EAL 리스트 등재", "ok"),
+
+    # 10 MOBIL SHC AWARE GREASE EP 2 — Rudder Carrier (FLUTEK)
+    ("210028  KLÜBERBIO LG 39-701 N 18 KG\n"
+     "210072  KLÜBERBIO LG 39-701 N 180 KG\n"
+     "또는 210077 / 210078 AG 39-602 N\n"
+     "※ FLUTEK 승인 이력 없음 — 개별 확인 필요", "chk"),
+
+    # 11 HOUTON TECTYL G OS 5550 ECO — Rudder Carrier (3K)
+    ("210028  KLÜBERBIO LG 39-701 N 18 KG\n"
+     "210072  KLÜBERBIO LG 39-701 N 180 KG\n"
+     "→ 3K / Korea rudder shaft & pump 승인", "ok"),
+
+    # 12 Margrease EP 0 — Rudder Carrier (3K)
+    ("210028  KLÜBERBIO LG 39-701 N 18 KG\n"
+     "210072  KLÜBERBIO LG 39-701 N 180 KG\n"
+     "→ 3K / Korea rudder shaft & pump 승인\n"
+     "※ 현재품 0번 주도 — 주도 등급 확인 필요", "ok"),
+
+    # 13 MOBIL Arctic EAL 32 — 냉동기 압축기유 (EAL 아님)
+    ("210170  KLÜBER SUMMIT RPE 32 (PAIL 20 LTR)\n"
+     "210175  KLÜBER SUMMIT RPE 32 (DRUM 200 LTR)\n"
+     "→ 동일 점도(VG 32) 냉동기 압축기유\n"
+     "※ 양쪽 모두 EAL 아님. 냉매 적합성 확인 필요", "chk"),
+]
+assert len(KLU_ITEMS) == len(PRODUCTS), (len(KLU_ITEMS), len(PRODUCTS))
+
+
 wb = openpyxl.Workbook()
 
 # =====================================================================
@@ -311,49 +411,60 @@ ws["A2"] = ("※ 대상 : PUTERI SABAH · AL SAKHAMAH · BU FINTAS · MARVEL DOV
 ws["A2"].font = F(9, color="404040"); ws["A2"].alignment = WRAP
 ws.row_dimensions[2].height = 30
 
-hdr = ["No.", "EAL 제품명", "오일 메이커\n(브랜드)", "제품 유형", "적용 선박", "주요 적용 부위", "비고"]
+hdr = ["No.", "EAL 제품명", "오일 메이커\n(브랜드)", "제품 유형", "적용 선박", "주요 적용 부위",
+       "Klüber 대응 품목 (Wilhelmsen 공급)"]
 for i, h in enumerate(hdr, start=1):
     c = ws.cell(4, i, h)
     c.font = F(10, True, "FFFFFF"); c.fill = HEADF; c.alignment = CTR; c.border = BOX
 ws.row_dimensions[4].height = 30
 
+KLU_STATE = {"ok": "1F7A3D", "chk": "C00000", "na": "808080"}
+
 r = 5
-for n, (name, maker, kind, vessels, parts, mark, note) in enumerate(PRODUCTS, start=1):
-    vals = [n, name, maker, kind, vessels, parts, note]
+for n, (prod, klu) in enumerate(zip(PRODUCTS, KLU_ITEMS), start=1):
+    name, maker, kind, vessels, parts, mark, note = prod
+    klu_text, klu_state = klu
+    vals = [n, name, maker, kind, vessels, parts, klu_text]
     for i, v in enumerate(vals, start=1):
         c = ws.cell(r, i, v)
         c.border = BOX
         c.alignment = CTR if i in (1, 3) else WRAP
         c.font = F(10, True) if i == 2 else F(9)
-    if note.startswith("★"):
-        ws.cell(r, 7).font = F(9, True, "C00000")
-        ws.cell(r, 7).fill = WARN
+    ws.cell(r, 7).font = Font(name=KF, size=9, color=KLU_STATE[klu_state])
+    if klu_state == "chk":
+        ws.cell(r, 7).fill = YEL
+    elif klu_state == "ok":
+        ws.cell(r, 7).fill = PatternFill("solid", fgColor="EAF4EC")
     if maker == "확인 필요":
         ws.cell(r, 3).fill = YEL; ws.cell(r, 3).font = F(10, True, "C00000")
     elif r % 2 == 1:
         for i in range(1, 7):
             ws.cell(r, i).fill = ALT
-    ws.row_dimensions[r].height = 62
+    ws.row_dimensions[r].height = 92
     r += 1
 last = r - 1
 
 r += 1
 ws.merge_cells(start_row=r, start_column=1, end_row=r, end_column=7)
 c = ws.cell(r, 1,
-    "▣ 확인 사항\n"
-    "  · 「EAL」 문자열 검색만으로는 PUTERI SABAH(Shell) · MARVEL DOVE(Chevron) 두 척이 누락됩니다. "
-    "두 차트는 EAL 을 「(VGP Compliant)」로 표기하며, 해당 제품은 Shell Naturelle 계열과 Chevron Clarity Syn EA 계열입니다.\n"
-    "  · MOBIL Arctic EAL 32 는 제품명에 EAL 이 들어가지만 냉동기 압축기용 POE 오일입니다. "
-    "해수 접촉부(oil-to-sea interface)가 아니므로 VGP 상 EAL 과 성격이 다릅니다 — 집계 목적에 따라 제외를 검토하십시오.\n"
-    "  · MOBIL SHC AWARE GEAR 100 과 HOUTON TECTYL G OS 5550 ECO 는 PRISM AGILITY 차트 본문 표가 아닌 COMMENTS 주석에만 있어 "
-    "표 검색으로는 잡히지 않습니다.\n"
-    "  · Margrease EP 0 (PUTERI SABAH Rudder Carrier) 는 VGP Compliant 로 지정되었으나 Shell 미공급 품목이라 제조사가 차트에 없습니다.\n"
-    "  · 노란색 셀 = 원문에서 확인되지 않아 별도 확인이 필요한 항목입니다.")
+    "▣ Klüber 대응 품목 읽는 법\n"
+    "  · 초록색 = 용도 · 점도 · 장비 메이커 승인까지 맞아떨어지는 대응 품목\n"
+    "  · 노란색 = 대응 품목은 있으나 별도 확인이 필요 (용도 미확인 / 장비 메이커 승인 이력 없음 / 주도 등급 상이)\n"
+    "  · 품목번호는 Wilhelmsen 공급 Klüber 품목 리스트 기준이며, 포장 단위(25 KG · 180 KG · 200 LTR 등)까지 표기했습니다.\n"
+    "  · 그리스는 하나의 현재 제품이 여러 부위에 쓰이는 경우가 많아, Klüber 쪽은 부위별로 품목이 갈립니다. "
+    "「● 부위 → 품목」 형태로 나눠 적었습니다.\n\n"
+    "▣ 대응 품목이 확정되지 않은 두 용도\n"
+    "  · 와이어로프 점착 그리스 (BIOADHESIVE PLUS · Naturelle S2 Grease · Clarity Syn EA Grease) 와 "
+    "개방기어 그리스 (BIO OG+) 는 Klüber 승인 자료 · SKF 리스트 어느 쪽에도 해당 용도가 없습니다. "
+    "품목 리스트상 KLÜBERBIO AM 92-142 와 GE 32-681 이 후보이나, 두 품목의 용도는 제공된 자료로 확인되지 않아 Klüber 확인이 필요합니다.\n"
+    "  · MOBIL Arctic EAL 32 는 냉동기 압축기유로 EAL 이 아닙니다. 대응품으로 적은 KLÜBER SUMMIT RPE 32 도 EAL 이 아니며, "
+    "점도(VG 32)만 같습니다. 냉매 적합성은 별도 확인이 필요합니다.\n"
+    "  · Klüber 승인 근거는 2018년 자료 기준입니다. 상세 근거는 \'Klüber·SKF 참조\' 시트를 보십시오.")
 c.font = F(9, color="404040"); c.alignment = WRAP
 c.fill = PatternFill("solid", fgColor="FFF9E6"); c.border = BOX
 ws.row_dimensions[r].height = 118
 
-for col, w in zip("ABCDEFG", [5, 26, 18, 26, 18, 34, 40]):
+for col, w in zip("ABCDEFG", [5, 26, 18, 26, 18, 30, 46]):
     ws.column_dimensions[col].width = w
 ws.freeze_panes = "A5"
 
