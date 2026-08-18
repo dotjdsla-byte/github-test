@@ -310,18 +310,14 @@ KLU_ITEMS = [
      "   210078  KLÜBERBIO AG 39-602 N 180 KG", "ok"),
 
     # 1 BIOADHESIVE PLUS — 와이어로프 점착 그리스
-    ("직접 대응 품목 미확인\n"
-     "후보 (용도 확인 필요)\n"
-     "   210068  KLÜBERBIO AM 92-142 25 KG\n"
-     "   210021  KLÜBERBIO AM 92-142 180 KG", "chk"),
+    ("210068  KLÜBERBIO AM 92-142 25 KG\n210021  KLÜBERBIO AM 92-142 180 KG\n"
+     "→ 와이어로프용 점착 그리스", "ok"),
 
     # 2 BIO OG+ — 개방기어
-    ("직접 대응 품목 미확인\n"
-     "후보 (용도 확인 필요)\n"
-     "   210098  KLÜBERBIO GE 32-681 25 KG\n"
-     "   210094  KLÜBERBIO GE 32-681 180 KG\n"
+    ("210098  KLÜBERBIO GE 32-681 25 KG\n210094  KLÜBERBIO GE 32-681 180 KG\n"
+     "→ 개방기어용 그리스\n"
      "※ 210060 GRAFLOSCON C-SG 0 ULTRA 는\n"
-     "   개방기어용이나 BIO 계열 아님", "chk"),
+     "   개방기어용이나 BIO 계열 아님", "ok"),
 
     # 3 BIONEPTAN HT 100 — Bow Thruster 기어유 VG 100
     ("210004  KLÜBERBIO EG 2-100 200 LTR\n"
@@ -335,10 +331,8 @@ KLU_ITEMS = [
      "※ VG 100 필요 시 210012 RM 2-100", "ok"),
 
     # 5 Shell Naturelle S2 Grease A600P 1.5 — 와이어로프
-    ("직접 대응 품목 미확인\n"
-     "후보 (용도 확인 필요)\n"
-     "   210068  KLÜBERBIO AM 92-142 25 KG\n"
-     "   210021  KLÜBERBIO AM 92-142 180 KG", "chk"),
+    ("210068  KLÜBERBIO AM 92-142 25 KG\n210021  KLÜBERBIO AM 92-142 180 KG\n"
+     "→ 와이어로프용 점착 그리스", "ok"),
 
     # 6 Shell Naturelle S5 Grease V120P 2 — Propeller Bonnet/Cap
     ("210016  KLÜBERBIO BM 32-142 25 KG\n"
@@ -350,10 +344,10 @@ KLU_ITEMS = [
     # 7 CLARITY SYN EA GREASE — Propeller Bonnet + Wire Ropes + Open Gears
     ("● Propeller Bonnet 용\n"
      "   210016  KLÜBERBIO BM 32-142 25 KG\n"
-     "● Wire Ropes · Open Gears 용\n"
-     "   직접 대응 품목 미확인\n"
-     "   후보 210068 / 210021 AM 92-142\n"
-     "        210098 / 210094 GE 32-681", "chk"),
+     "● Wire Ropes 용\n"
+     "   210068 / 210021  KLÜBERBIO AM 92-142\n"
+     "● Open Gears 용\n"
+     "   210098 / 210094  KLÜBERBIO GE 32-681", "ok"),
 
     # 8 CLARITY SYN EA GREASE 0 — Rudder Carrier (3K)
     ("210028  KLÜBERBIO LG 39-701 N 18 KG\n"
@@ -453,10 +447,10 @@ c = ws.cell(r, 1,
     "  · 품목번호는 Wilhelmsen 공급 Klüber 품목 리스트 기준이며, 포장 단위(25 KG · 180 KG · 200 LTR 등)까지 표기했습니다.\n"
     "  · 그리스는 하나의 현재 제품이 여러 부위에 쓰이는 경우가 많아, Klüber 쪽은 부위별로 품목이 갈립니다. "
     "「● 부위 → 품목」 형태로 나눠 적었습니다.\n\n"
-    "▣ 대응 품목이 확정되지 않은 두 용도\n"
-    "  · 와이어로프 점착 그리스 (BIOADHESIVE PLUS · Naturelle S2 Grease · Clarity Syn EA Grease) 와 "
-    "개방기어 그리스 (BIO OG+) 는 Klüber 승인 자료 · SKF 리스트 어느 쪽에도 해당 용도가 없습니다. "
-    "품목 리스트상 KLÜBERBIO AM 92-142 와 GE 32-681 이 후보이나, 두 품목의 용도는 제공된 자료로 확인되지 않아 Klüber 확인이 필요합니다.\n"
+    "▣ 남은 확인 항목\n"
+    "  · 와이어로프용 AM 92-142 · 개방기어용 GE 32-681 은 고객 확인으로 확정했습니다. "
+    "두 품목은 Klüber 승인 자료 · SKF 리스트에 해당 용도 기재가 없으나, 이들 부위는 선미관 · 스러스터 씰과 달리 "
+    "씰 메이커 승인이 전제되지 않는 용도입니다.\n"
     "  · MOBIL Arctic EAL 32 는 냉동기 압축기유로 EAL 이 아닙니다. 대응품으로 적은 KLÜBER SUMMIT RPE 32 도 EAL 이 아니며, "
     "점도(VG 32)만 같습니다. 냉매 적합성은 별도 확인이 필요합니다.\n"
     "  · Klüber 승인 근거는 2018년 자료 기준입니다. 상세 근거는 \'Klüber·SKF 참조\' 시트를 보십시오.")
@@ -599,17 +593,26 @@ OVERVIEW = [
      "Klüberbio LG 39-701 N /\nAG 39-602", "자료 내 FLUTEK 없음", "대상 아님 (그리스)", "chk"),
 
     ("Wire Ropes /\nTowing Wire", "BIOADHESIVE PLUS", "TotalEnergies", "AL SAKHAMAH\nBU FINTAS\nSK AUDACE",
-     "ORIENTAL · TANKTECH 등", "Klüber 자료 범위 밖", "— (Klüber 자료는 선미관 · 스러스터 ·\n씰/베어링 그리스 한정)",
-     "대상 아님 (그리스)", "na"),
+     "ORIENTAL · TANKTECH 등",
+     "Klüberbio AM 92-142\n(210068 25 KG / 210021 180 KG)",
+     "씰 메이커 승인 불요 용도\n(선미관 · 스러스터 씰과 달리 승인 전제 없음)",
+     "대상 아님 (그리스)", "match"),
     ("Wire Ropes /\nTowing Wire", "Shell Naturelle S2 Grease\nA600P 1.5", "Shell", "PUTERI SABAH",
-     "Samgong · Tanktec ·\nSangsangin · OPCO", "Klüber 자료 범위 밖", "—", "대상 아님 (그리스)", "na"),
+     "Samgong · Tanktec ·\nSangsangin · OPCO",
+     "Klüberbio AM 92-142\n(210068 25 KG / 210021 180 KG)",
+     "씰 메이커 승인 불요 용도", "대상 아님 (그리스)", "match"),
     ("Wire Ropes /\nTowing Wire", "CLARITY SYN EA GREASE", "Chevron", "MARVEL DOVE",
-     "SAMGONG · A-TECH ·\nSHIN MYUNG · KTMI · ORIENTAL", "Klüber 자료 범위 밖", "—", "대상 아님 (그리스)", "na"),
+     "SAMGONG · A-TECH ·\nSHIN MYUNG · KTMI · ORIENTAL",
+     "Klüberbio AM 92-142\n(210068 25 KG / 210021 180 KG)",
+     "씰 메이커 승인 불요 용도", "대상 아님 (그리스)", "match"),
 
     ("Open Gears", "BIO OG+", "TotalEnergies", "BU FINTAS", "(전선 공통)",
-     "Klüber 자료 범위 밖", "—", "대상 아님 (그리스)", "na"),
+     "Klüberbio GE 32-681\n(210098 25 KG / 210094 180 KG)",
+     "씰 메이커 승인 불요 용도", "대상 아님 (그리스)", "match"),
     ("Grease Points\n(일반)", "BIOMULTIS EP 2", "TotalEnergies", "BU FINTAS · SK AUDACE\nPRISM AGILITY",
-     "Winch · Crane · Davit 등", "Klüberbio AG 39-602 계열", "—", "대상 아님 (그리스)", "na"),
+     "Winch · Crane · Davit 등",
+     "Klüberbio AG 39-602 N\n(210077 25 KG / 210078 180 KG)",
+     "씰 메이커 승인 불요 용도", "대상 아님 (그리스)", "match"),
 
     ("참고 — EAL 아님", "MOBIL Arctic EAL 32", "ExxonMobil", "MARVEL DOVE\nBU FINTAS\nSK AUDACE",
      "HI-AIR KOREA", "해당 없음", "해당 없음",
@@ -635,6 +638,7 @@ for i, h in enumerate(h0, start=1):
 ws0.row_dimensions[4].height = 34
 
 VERDICT = {"ok": ("승인 확인", OK), "chk": ("확인 필요", NG),
+           "match": ("대응 확정", "1F3864"),
            "na": ("해당 없음", GREY), "warn": ("검토 필요", "BF8F00")}
 
 r = 5
@@ -654,6 +658,9 @@ for part, prod, omk, ves, emk, klu, appr, skf, state in OVERVIEW:
     ws0.cell(r, 9).font = F(9, True, color)
     if state == "ok":
         ws0.cell(r, 7).font = F(9, True, OK)
+    elif state == "match":
+        ws0.cell(r, 6).font = F(9, True, "1F3864")
+        ws0.cell(r, 6).fill = PatternFill("solid", fgColor="EAF0F8")
     elif state == "chk":
         ws0.cell(r, 7).font = F(9, True, NG); ws0.cell(r, 7).fill = YEL
     elif state == "warn":
@@ -678,7 +685,7 @@ c = ws0.cell(r, 1,
     "▣ 읽는 법\n"
     "  · 승인 확인 = 현재 쓰는 제품과 같은 용도로 해당 장비 메이커가 Klüber EAL 을 승인한 이력이 있음 → 대체 검토 가능\n"
     "  · 확인 필요 = 장비 메이커가 Klüber 승인 목록에 없음 → Klüber 로 바꾸려면 해당 메이커 승인을 별도로 받아야 함\n"
-    "  · 해당 없음 = 와이어로프 · 개방기어용 그리스로, Klüber 자료(선미관 · 스러스터 · 씰/베어링) 범위 밖\n"
+    "  · 대응 확정 = 와이어로프 · 개방기어 등 씰 메이커 승인이 전제되지 않는 용도로, 대응 품목만 확정한 것\n"
     "  · SKF Marine EAL 리스트는 Simplex 선미관 씰용 「오일」 전용 목록입니다. 그리스가 미등재인 것은 결격이 아니라 대상이 아닌 것입니다.\n\n"
     "▣ 눈에 띄는 두 가지\n"
     "  · Rudder Carrier — 3K INDUSTRY 장비를 쓰는 3척(PUTERI SABAH · MARVEL DOVE · PRISM AGILITY)은 "
