@@ -139,3 +139,8 @@ def blank_slide(prs, title):
         shp._element.getparent().remove(shp._element)
     frame(s, title)
     return s
+
+
+def notes(slide, text):
+    """Speaker notes, written as plain spoken English."""
+    slide.notes_slide.notes_text_frame.text = text
