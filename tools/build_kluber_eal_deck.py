@@ -145,8 +145,8 @@ def new_slide(title):
 
 
 L = Inches(0.55)          # left margin
-COLW = Inches(6.05)       # column width
-R = Inches(6.95)          # right column x
+COLW = Inches(5.95)       # column width
+R = Inches(6.83)          # right column x
 TOP = Inches(1.45)
 
 # ---------------------------------------------------------------- slide 2
@@ -160,14 +160,14 @@ para(tf, "곧, 그리스가 구조를 유지하며 제 기능을 수행할 수 �
      13, False, INK, 10, line=1.25)
 para(tf, "※ 무기 증점제(Inorganic thickener)는 용융되지 않습니다.", 11.5, True, GREY, 0)
 
-y2 = y + Inches(1.75)
+y2 = y + Inches(1.35)
 y2 = chip(s, L, y2, COLW, "증점제 방식별 특성")
 table(s, L, y2, COLW,
       [["증점제", "적점", "Zn 부식 / 생분해성"],
        [("무기 증점제 · Complex Soap", False, INK, PP_ALIGN.LEFT), ("높음", False, INK, PP_ALIGN.CENTER), ("제약 있음", False, INK, PP_ALIGN.CENTER)],
        [("Calcium Single Soap", False, INK, PP_ALIGN.LEFT), ("낮음", False, INK, PP_ALIGN.CENTER), ("양호", False, INK, PP_ALIGN.CENTER)],
        [("Hybrid Thickener  (AM 92-142)", True, ACCENT, PP_ALIGN.LEFT), ("높음", True, ACCENT, PP_ALIGN.CENTER), ("양호", True, ACCENT, PP_ALIGN.CENTER)]],
-      [Inches(2.95), Inches(1.35), Inches(1.75)])
+      [Inches(2.90), Inches(1.35), Inches(1.70)])
 
 y = chip(s, R, TOP, COLW, "결과")
 rect(s, R, y, COLW, Inches(1.5), LIGHT)
@@ -202,18 +202,18 @@ end = table(s, L, y2, COLW,
             [["제품", "잔존량", "비교"],
              [("Klüberbio AM 92-142  (EAL)", True, ACCENT, PP_ALIGN.LEFT), ("12.2", True, ACCENT, PP_ALIGN.CENTER), ("약 10배", True, ACCENT, PP_ALIGN.CENTER)],
              [("Competitor grease (Mineral oil)", False, INK, PP_ALIGN.LEFT), ("1.05", False, INK, PP_ALIGN.CENTER), ("기준", False, GREY, PP_ALIGN.CENTER)]],
-            [Inches(3.05), Inches(1.5), Inches(1.5)])
+            [Inches(2.95), Inches(1.5), Inches(1.5)])
 tb, tf = textbox(s, L, end + Inches(0.12), COLW, Inches(0.3))
 para(tf, "높은 잔존 그리스량 → 로프 보호력 우수", 13, True, INK, 0, first=True)
 
 y = chip(s, R, TOP, COLW, "비산 시 위험")
-pw = Inches(2.9)
+pw = Inches(2.85)
 s.shapes.add_picture(MEDIA + "image9.png", R, y, width=pw)
-s.shapes.add_picture(MEDIA + "image10.png", R + Inches(3.15), y, width=pw)
+s.shapes.add_picture(MEDIA + "image10.png", R + Inches(3.10), y, width=pw)
 
 cy = y + Inches(1.95)
 for cx, txt in ((R, "조종실 전면 유리에 그리스 낙하\n시야 방해 → 안전 위험"),
-                (R + Inches(3.15), "브레이크 디스크로 그리스 비산\n제동 성능 저하 우려")):
+                (R + Inches(3.10), "브레이크 디스크로 그리스 비산\n제동 성능 저하 우려")):
     tb, tf = textbox(s, cx, cy, pw, Inches(0.75))
     for i, ln in enumerate(txt.split("\n")):
         para(tf, ln, 12, i == 1, RED if i == 1 else INK, 2, first=(i == 0),
@@ -228,7 +228,7 @@ para(tf, "비부착성 그리스는 로프를 보호하지 못할 뿐 아니라,
      first=True, line=1.25)
 
 # ---------------------------------------------------------------- slide 4
-s = new_slide("Klüberbio AM 92-142  —  −60 °C 굴곡 스트립(Bending Strip) 시험")
+s = new_slide("Klüberbio AM 92-142  —  -60 °C 굴곡 스트립(Bending Strip) 시험")
 
 y = chip(s, L, TOP, COLW, "시험 목적")
 tb, tf = textbox(s, L, y, COLW, Inches(0.9))
@@ -259,16 +259,16 @@ para(tf, "피막이 손상되거나 벗겨지지 않는 한, 시험 온도까지
 
 y4 = y3 + Inches(1.05)
 tb, tf = textbox(s, L, y4, COLW, Inches(0.4))
-para(tf, "유동점(Pour Point)  −30 °C  —  저온 환경 운용에 유리", 13.5, True, ACCENT, 0,
+para(tf, "유동점(Pour Point)  -30 °C  —  저온 환경 운용에 유리", 13.5, True, ACCENT, 0,
      first=True)
 
-y = chip(s, R, TOP, COLW, "−60 °C 저온 굴곡 시험 결과")
-pw = Inches(2.9)                       # 967x514 -> h 1.54"
+y = chip(s, R, TOP, COLW, "-60 °C 저온 굴곡 시험 결과")
+pw = Inches(2.85)                       # 967x514 -> h 1.54"
 s.shapes.add_picture(MEDIA + "image12.jpeg", R, y, width=pw)
-s.shapes.add_picture(MEDIA + "image13.jpeg", R + Inches(3.15), y, width=pw)
+s.shapes.add_picture(MEDIA + "image13.jpeg", R + Inches(3.10), y, width=pw)
 cy = y + Inches(1.66)
 for cx, txt in ((R, "코팅 금속판\n균열 · 박리 없음"),
-                (R + Inches(3.15), "실린더 굴곡\n부착 상태 유지")):
+                (R + Inches(3.10), "실린더 굴곡\n부착 상태 유지")):
     tb, tf = textbox(s, cx, cy, pw, Inches(0.75))
     for i, ln in enumerate(txt.split("\n")):
         para(tf, ln, 12, i == 1, INK if i == 1 else GREY, 2, first=(i == 0),
@@ -278,7 +278,7 @@ y5 = cy + Inches(0.95)
 rect(s, R, y5, COLW, Inches(1.0), LIGHT)
 tb, tf = textbox(s, R + Inches(0.2), y5, COLW - Inches(0.4), Inches(1.0),
                  anchor=MSO_ANCHOR.MIDDLE)
-para(tf, "−60 °C 에서 24시간 냉각 후 굴곡을 주어도 피막이 갈라지거나 "
+para(tf, "-60 °C 에서 24시간 냉각 후 굴곡을 주어도 피막이 갈라지거나 "
          "벗겨지지 않았습니다.", 12.5, False, INK, 0, first=True, line=1.25)
 
 prs.save(OUT)
