@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>대진표 수정안</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#0f5c43; --green2:#13704f; --line:#c9ced6; --head:#eef1f6; --soft:#f4f7fc;
+    --text:#1f2329; --muted:#5b6370; --blue:#1f5fd1; --accent:#e8553d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:#fff;font-family:"Noto Sans KR","WenQuanYi Zen Hei",sans-serif;color:var(--text)}
+  .page{width:700px;background:#fff}
+  header{background:linear-gradient(90deg,var(--green),var(--green2));color:#fff;padding:12px 18px 14px;position:relative}
+  header .en{font-size:11px;letter-spacing:.5px;opacity:.85}
+  header h1{margin:4px 0 0;font-size:21px;font-weight:800}
+  header .badges{position:absolute;right:14px;top:12px;display:flex;gap:6px}
+  .badge{border:1.5px solid rgba(255,255,255,.7);border-radius:8px;padding:6px 12px;font-weight:800;font-size:17px;background:rgba(255,255,255,.12)}
+  .badge.prop{background:var(--accent);border-color:var(--accent);font-size:14px;padding:8px 10px}
+  .info{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;padding:16px 18px 10px;font-size:13px}
+  .info b{display:inline-block;width:62px;font-weight:700}
+  .info span.blue{color:var(--blue);font-weight:700}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;padding:6px 18px 14px;border-bottom:1px dashed var(--line)}
+  .chip{border:1px solid var(--line);border-radius:16px;padding:5px 12px;font-size:12px;font-weight:500}
+  .chip:before{content:"●";color:var(--green2);margin-right:6px;font-size:9px;vertical-align:1px}
+  .chip.hl{border-color:var(--accent);color:var(--accent);font-weight:700}
+  .chip.hl:before{color:var(--accent)}
+  h2{font-size:14px;font-weight:700;margin:18px 10px 10px;padding-left:9px;border-left:4px solid var(--green2)}
+  table{border-collapse:collapse;width:calc(100% - 20px);margin:0 10px;font-size:13px}
+  th,td{border:1px solid var(--line)}
+  th{background:var(--head);height:36px;font-weight:700}
+  td.date{width:88px;text-align:center;font-weight:700;background:#fff}
+  td.date small{display:block;font-weight:400;color:var(--muted);font-size:12px;margin-top:2px}
+  td.date .ev{display:block;margin-top:12px;font-size:10.5px;font-weight:500;color:var(--accent);line-height:1.6}
+  td.col{padding:0;vertical-align:top}
+  .g{text-align:center;padding:10px 4px;border-bottom:1px solid #e3e7ee;min-height:52px}
+  .g:last-child{border-bottom:none}
+  .g .tm{font-size:12px;font-weight:500}
+  .g .sc{font-size:15px;font-weight:800;margin-top:3px}
+  .g.b{background:var(--soft);color:var(--blue)}
+  .g.mk .tm:after{content:" 목포";font-size:10px;font-weight:700;color:#fff;background:var(--accent);border-radius:4px;padding:1px 4px;margin-left:4px}
+  .sep{border-top:2px solid var(--line)}
+  .teams td{height:38px;padding:0 10px;font-weight:700;font-size:12.5px}
+  .teams td.lbl{text-align:center;width:88px}
+  .num{display:inline-block;width:18px;height:18px;line-height:18px;text-align:center;background:#eef1f6;border-radius:4px;font-size:11px;margin-right:8px}
+  .cmp th{font-size:12.5px}
+  .cmp td{text-align:center;height:32px;font-size:12.5px}
+  .cmp td.k{font-weight:700;background:var(--head)}
+  .cmp td.new{color:var(--green2);font-weight:800}
+  .notes{font-size:11.5px;color:var(--muted);padding:10px 14px 18px;line-height:1.7}
+  .stack{display:flex;flex-direction:column}
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="en">2026 MIRYANG MAYOR'S CUP YOUTH FOOTBALL TOURNAMENT</div>
+    <h1>2026년 제3회 밀양시장배 유소년 축구대회 대진표</h1>
+    <div class="badges"><div class="badge prop">수정 제안안</div><div class="badge">U-10</div></div>
+  </header>
+
+  <div class="info">
+    <div><b>기간</b>11월27일(금) ~ 11월29일(일) (3일간)</div>
+    <div><b>경기장</b>보조구장A , <span class="blue">보조구장B</span></div>
+    <div><b>경기시간</b>전,후반 각20분. 하프타임5분.</div>
+    <div><b>순위결정</b>승점 - 승자승 - 골득실 순</div>
+  </div>
+  <div class="chips">
+    <div class="chip">본선 토너먼트 무승부시 바로 승부차기</div>
+    <div class="chip">모든 경기 대진표 왼쪽이 홈팀</div>
+    <div class="chip hl">대진·홈팀 변경 없음, 토요일 시간만 조정</div>
+  </div>
+
+  <h2>경기 일정</h2>
+  <table>
+    <thead><tr><th>일정</th><th>A</th><th>B</th><th>C</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="date">11월27일<small>(금)</small></td>
+        <td class="col"><div class="stack">
+          <div class="g"><div class="tm">16:00 (보조A)</div><div class="sc">1 - 2</div></div>
+          <div class="g b"><div class="tm">16:00 (보조B)</div><div class="sc">3 - 4</div></div>
+        </div></td>
+        <td class="col"><div class="stack">
+          <div class="g"><div class="tm">16:45 (보조A)</div><div class="sc">1 - 2</div></div>
+          <div class="g b"><div class="tm">16:45 (보조B)</div><div class="sc">3 - 4</div></div>
+        </div></td>
+        <td class="col"><div class="stack">
+          <div class="g"><div class="tm">17:30 (보조A)</div><div class="sc">1 - 2</div></div>
+          <div class="g b"><div class="tm">17:30 (보조B)</div><div class="sc">3 - 4</div></div>
+        </div></td>
+      </tr>
+      <tr class="sep">
+        <td class="date">11월28일<small>(토)</small>
+          <span class="ev">11:00 개회식<br>12:45~13:45<br>점심</span></td>
+        <td class="col"><div class="stack">
+          <div class="g"><div class="tm">9:15 (보조A)</div><div class="sc">3 - 1</div></div>
+          <div class="g b"><div class="tm">9:15 (보조B)</div><div class="sc">4 - 2</div></div>
+          <div class="g"><div class="tm">13:45 (보조A)</div><div class="sc">1 - 4</div></div>
+          <div class="g b"><div class="tm">13:45 (보조B)</div><div class="sc">2 - 3</div></div>
+        </div></td>
+        <td class="col"><div class="stack">
+          <div class="g"><div class="tm">10:00 (보조A)</div><div class="sc">3 - 1</div></div>
+          <div class="g"><div class="tm">12:00 (보조A)</div><div class="sc">4 - 2</div></div>
+          <div class="g"><div class="tm">15:15 (보조A)</div><div class="sc">1 - 4</div></div>
+          <div class="g b"><div class="tm">15:15 (보조B)</div><div class="sc">2 - 3</div></div>
+        </div></td>
+        <td class="col"><div class="stack">
+          <div class="g b"><div class="tm">10:00 (보조B)</div><div class="sc">4 - 5</div></div>
+          <div class="g b"><div class="tm">12:00 (보조B)</div><div class="sc">2 - 3</div></div>
+          <div class="g"><div class="tm">14:30 (보조A)</div><div class="sc">2 - 4</div></div>
+          <div class="g b mk"><div class="tm">14:30 (보조B)</div><div class="sc">5 - 1</div></div>
+          <div class="g mk"><div class="tm">16:45 (보조A)</div><div class="sc">1 - 3</div></div>
+        </div></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>토요일 경기 간격 비교 (경기 시작 기준)</h2>
+  <table class="cmp">
+    <thead><tr><th></th><th>현재</th><th>수정안</th></tr></thead>
+    <tbody>
+      <tr><td class="k">A조</td><td>4팀 모두 5시간</td><td class="new">4팀 모두 4시간 30분</td></tr>
+      <tr><td class="k">B조</td><td>4팀 모두 5시간 45분</td><td class="new">5시간 15분 (2팀) / 3시간 15분 (2팀)</td></tr>
+      <tr><td class="k">C조</td><td>2시간 ~ 4시간 45분</td><td class="new">2시간 15분 ~ 4시간 45분</td></tr>
+      <tr><td class="k">조 평균 차이</td><td>2시간 45분</td><td class="new">48분</td></tr>
+      <tr><td class="k">목포 첫 경기</td><td>12:00</td><td class="new">14:30 (10시 출발 가능)</td></tr>
+      <tr><td class="k">마지막 경기</td><td>16:45</td><td class="new">16:45 (동일)</td></tr>
+    </tbody>
+  </table>
+
+  <h2>조별예선 참가팀</h2>
+  <table class="teams">
+    <thead><tr><th></th><th>A</th><th>B</th><th>C</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl" rowspan="5">조별예선</td>
+        <td><span class="num">1</span>포항 유소년FC</td><td><span class="num">1</span>부산 강서FC</td><td><span class="num">1</span>목포 JS숯돌이SC</td></tr>
+      <tr><td><span class="num">2</span>울산 옥동초FC</td><td><span class="num">2</span>밀양 아톰FC</td><td><span class="num">2</span>부산 준타스FC</td></tr>
+      <tr><td><span class="num">3</span>부산 벤시더FC</td><td><span class="num">3</span>광주 바로주니어FC</td><td><span class="num">3</span>창원 축구센터FC</td></tr>
+      <tr><td><span class="num">4</span>양산 레미FC</td><td><span class="num">4</span>부산 센텀HJFC</td><td><span class="num">4</span>포항 네오주니어FC</td></tr>
+      <tr><td></td><td></td><td><span class="num">5</span>부산 한상운FC</td></tr>
+    </tbody>
+  </table>
+  <div class="notes">
+    · 구장 2면 시간 겹침 없음 · A·B조 마지막 라운드 동시 진행 · C조 연속 경기 없음 (최소 휴식 2시간 15분)<br>
+    · 금요일 일정은 기존과 동일
+  </div>
+</div>
+</body>
+</html>
