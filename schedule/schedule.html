@@ -50,7 +50,6 @@
   .cmp td.new{color:var(--green2);font-weight:800}
   .notes{font-size:11.5px;color:var(--muted);padding:10px 14px 18px;line-height:1.7}
   .stack{display:flex;flex-direction:column}
-  .g.ad .tm:after{content:" 추가 배치";font-size:10px;font-weight:700;color:#fff;background:#8a6d00;border-radius:4px;padding:1px 4px;margin-left:4px}
 </style>
 </head>
 <body>
@@ -70,7 +69,7 @@
   <div class="chips">
     <div class="chip">본선 토너먼트 무승부시 바로 승부차기</div>
     <div class="chip">모든 경기 대진표 왼쪽이 홈팀</div>
-    <div class="chip hl">대진·홈팀 변경 없음, 토요일 시간만 조정</div>
+    <div class="chip hl">A·B조 토요일 첫 경기: 금요일 승자끼리 · 패자끼리</div>
     <div class="chip hl">11시 개회식 전 팀 참석 기준</div>
   </div>
 
@@ -95,25 +94,25 @@
       </tr>
       <tr class="sep">
         <td class="date">11월28일<small>(토)</small>
-          <span class="ev">11:00 개회식<br>12:45~14:00<br>점심</span></td>
+          <span class="ev">11:00 개회식<br>12:45~13:45<br>점심</span></td>
         <td class="col"><div class="stack">
-          <div class="g"><div class="tm">10:00 (보조A)</div><div class="sc">3 - 1</div></div>
-          <div class="g b"><div class="tm">10:00 (보조B)</div><div class="sc">4 - 2</div></div>
-          <div class="g b"><div class="tm">14:00 (보조B)</div><div class="sc">1 - 4</div></div>
-          <div class="g"><div class="tm">15:00 (보조A)</div><div class="sc">2 - 3</div></div>
+          <div class="g"><div class="tm">10:00 (보조A)</div><div class="sc">3·4승 - 1·2승</div></div>
+          <div class="g b"><div class="tm">10:00 (보조B)</div><div class="sc">3·4패 - 1·2패</div></div>
+          <div class="g"><div class="tm">15:15 (보조A)</div><div class="sc">1·2승 - 3·4패</div></div>
+          <div class="g b"><div class="tm">15:15 (보조B)</div><div class="sc">1·2패 - 3·4승</div></div>
         </div></td>
         <td class="col"><div class="stack">
-          <div class="g b ad"><div class="tm">9:15 (보조B)</div><div class="sc">4 - 2</div></div>
-          <div class="g b"><div class="tm">12:00 (보조B)</div><div class="sc">3 - 1</div></div>
-          <div class="g"><div class="tm">15:45 (보조A)</div><div class="sc">1 - 4</div></div>
-          <div class="g b"><div class="tm">15:45 (보조B)</div><div class="sc">2 - 3</div></div>
+          <div class="g"><div class="tm">13:45 (보조A)</div><div class="sc">3·4승 - 1·2승</div></div>
+          <div class="g b"><div class="tm">13:45 (보조B)</div><div class="sc">3·4패 - 1·2패</div></div>
+          <div class="g"><div class="tm">16:00 (보조A)</div><div class="sc">1·2승 - 3·4패</div></div>
+          <div class="g b"><div class="tm">16:00 (보조B)</div><div class="sc">1·2패 - 3·4승</div></div>
         </div></td>
         <td class="col"><div class="stack">
           <div class="g"><div class="tm">9:15 (보조A)</div><div class="sc">2 - 3</div></div>
+          <div class="g b"><div class="tm">9:15 (보조B)</div><div class="sc">4 - 5</div></div>
           <div class="g mk"><div class="tm">12:00 (보조A)</div><div class="sc">5 - 1</div></div>
-          <div class="g"><div class="tm">14:00 (보조A)</div><div class="sc">2 - 4</div></div>
-          <div class="g b mk"><div class="tm">15:00 (보조B)</div><div class="sc">1 - 3</div></div>
-          <div class="g ad"><div class="tm">16:30 (보조A)</div><div class="sc">4 - 5</div></div>
+          <div class="g"><div class="tm">14:30 (보조A)</div><div class="sc">2 - 4</div></div>
+          <div class="g b mk"><div class="tm">14:30 (보조B)</div><div class="sc">1 - 3</div></div>
         </div></td>
       </tr>
     </tbody>
@@ -123,13 +122,13 @@
   <table class="cmp">
     <thead><tr><th></th><th>현재</th><th>수정안</th></tr></thead>
     <tbody>
-      <tr><td class="k">A조</td><td>4팀 모두 5시간 45분</td><td class="new">4시간 45분 ~ 5시간 45분</td></tr>
-      <tr><td class="k">B조</td><td>4팀 모두 6시간 30분</td><td class="new">강서·광주 5시간 30분 / 밀양·센텀 7시간 15분</td></tr>
-      <tr><td class="k">C조</td><td>4시간 30분 ~ 6시간 30분</td><td class="new">4시간 45분 ~ 6시간 30분</td></tr>
-      <tr><td class="k">가장 긴 체류</td><td>6시간 30분 (6팀)</td><td class="new">7시간 15분 (2팀)</td></tr>
-      <tr><td class="k">목포 · 광주 첫 경기</td><td>12:00 · 9:45</td><td class="new">12:00 · 12:00</td></tr>
-      <tr><td class="k">점심시간</td><td>12:45 ~ 14:00</td><td class="new">12:45 ~ 14:00 (동일)</td></tr>
-      <tr><td class="k">마지막 경기</td><td>16:45</td><td class="new">16:30</td></tr>
+      <tr><td class="k">A조</td><td>4팀 모두 5시간 45분</td><td class="new">4팀 모두 6시간</td></tr>
+      <tr><td class="k">B조</td><td>4팀 모두 6시간 30분</td><td class="new">4팀 모두 5시간 45분</td></tr>
+      <tr><td class="k">C조</td><td>4시간 30분 ~ 6시간 30분</td><td class="new">3시간 30분 ~ 6시간</td></tr>
+      <tr><td class="k">가장 긴 체류</td><td>6시간 30분 (6팀)</td><td class="new">6시간 (7팀)</td></tr>
+      <tr><td class="k">목포 · 광주 첫 경기</td><td>12:00 · 9:45</td><td class="new">12:00 · 13:45</td></tr>
+      <tr><td class="k">점심시간</td><td>12:45 ~ 14:00</td><td class="new">12:45 ~ 13:45 (1시간)</td></tr>
+      <tr><td class="k">마지막 경기</td><td>16:45</td><td class="new">16:00 (45분 일찍 종료)</td></tr>
     </tbody>
   </table>
 
@@ -146,9 +145,9 @@
     </tbody>
   </table>
   <div class="notes">
-    · 구장 2면 시간 겹침 없음 · B조 마지막 라운드 동시 진행 (A조는 14:00 · 15:00 시차 진행) · 모든 팀 최소 경기 간격 2시간 30분<br>
-    · 「추가 배치」 = 지정 안 된 B조 4-2, C조 4-5를 빈 시간에 넣은 경기<br>
-    · 금요일 일정, 목포 첫 경기 시간(12:00), 점심시간은 기존과 동일 · 체류 = 개회식·첫 경기 중 빠른 시간 ~ 마지막 경기 종료
+    · 「3·4승」 = 금요일 3-4 경기 승리팀 · A·B조 토요일 경기는 같은 시간에 동시 진행 · 금요일 무승부 시 기존 대진(3-1, 4-2 / 1-4, 2-3) 적용<br>
+    · 왼쪽 홈팀 · 팀별 홈 경기 수는 기존과 동일 · C조는 한상운 경기(5-1, 4-5) 그대로, 나머지 대진도 그대로<br>
+    · 구장 2면 시간 겹침 없음 · 모든 팀 최소 경기 간격 2시간 15분 · 체류 = 개회식·첫 경기 중 빠른 시간 ~ 마지막 경기 종료
   </div>
 </div>
 </body>
