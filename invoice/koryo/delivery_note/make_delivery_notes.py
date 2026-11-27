@@ -13,9 +13,10 @@ ITEMS = [  # (no, part no, description, remark, qty, unit)
     (1, "NONE", "Intrinsically Safe SmartPhone Camera", "Model: IS530.1", 1, "SET"),
 ]
 SELLER = {
-    "name": "KORYO MUNHWASA (고려문화사)",
-    "addr": "2F, 260-10, Euljiro 3-ga, Jung-gu, Seoul, Republic of Korea",
-    "contact": "CEO : KIM CHAE GI (김채기)     E-MAIL : 212happy@naver.com",
+    "name": "OXEN & PARTNERS",
+    "sub": "옥슨 앤 파트너스",
+    "addr": '"C" dong, 17 Haeyang-ro, Yeongdo-gu, Busan, Republic of Korea (POST CODE: 49000)',
+    "contact": "TEL : +82-51-714-6963     FAX : +82-51-714-6964     MAIL : supply@oxenp.com",
 }
 
 F = "Arial"
@@ -48,11 +49,12 @@ def build(vessel):
         ws.merge_cells(rng)
 
     # Header
-    merge("A1:F1"); put("A1", SELLER["name"], 18, True, "center"); ws.row_dimensions[1].height = 30
-    merge("A2:F2"); put("A2", SELLER["addr"], 9, h="center", color="404040")
-    merge("A3:F3"); put("A3", SELLER["contact"], 9, h="center", color="404040")
-    merge("A4:F4"); put("A4", "#### Non-use of Materials containing asbestos ####", 9, h="center", color=BLUE)
-    ws.row_dimensions[5].height = 8
+    merge("A1:F1"); put("A1", SELLER["name"], 22, True, "center"); ws.row_dimensions[1].height = 34
+    merge("A2:F2"); put("A2", SELLER["sub"], 11, True, "center", color="C0145A")
+    merge("A3:F3"); put("A3", SELLER["addr"], 9, h="center", color="404040")
+    merge("A4:F4"); put("A4", SELLER["contact"], 9, h="center", color="404040")
+    merge("A5:F5"); put("A5", "#### Non-use of Materials containing asbestos ####", 9, h="center", color=BLUE)
+    ws.row_dimensions[5].height = 26; ws["A5"].alignment = Alignment(horizontal="center", vertical="top")
     merge("B6:E6"); put("B6", "DELIVERY NOTE / RECEIPT", 16, True, "center", "FFFFFF", dark)
     for col in "BCDE":
         ws[f"{col}6"].fill = dark
